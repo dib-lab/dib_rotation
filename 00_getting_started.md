@@ -13,4 +13,11 @@ During this rotation, you will learn how to:
  + quickly compare large sequencing datasets
  + how to document workflows using git and GitHub. 
  
- The files in this repository are ordered by execution, meaning file `00*` should be completed before `01*`. 
+The files in this repository are ordered by execution, meaning file `00*` should be completed before `01*`. 
+
+Most of the work done in this rotation will be completed on Farm. 
+However, you will need to access Farm from your own computer. 
+We will use an SSH-client to be able to interact with Farm. 
+If you are using a Mac or a Linux, your computer comes with a program called `Terminal` that we will use as an SSH-client.
+If you are on a Windows running Windows 10, you can install the [Ubuntu Subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+Otherwise, please follow the instructions for Windows found at this [link](https://hpc-carpentry.github.io/hpc-intro/setup/).
