@@ -56,3 +56,51 @@ You will need the private key file each time you log into farm.
 
 
 ## Connecting to a remote computer 
+
+Once you have a farm account, we will use the command `ssh` to connect to farm. 
+`ssh` stands for "secure shell". 
+
+To connect to your account on farm, type:
+
+```
+ssh -i ~/.ssh/your_keyfile_name username@farm.cse.ucdavis.edu
+```
+
+If you are successful, you will see a message that looks something like this:
+
+```
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-70-generic x86_64)
+
+1 updates could not be installed automatically. For more details,
+see /var/log/unattended-upgrades/unattended-upgrades.log
+
+*** System restart required ***
+A transfer node, c11-42, is available for rsync, scp, gzip
+From outside the Farm cluster use port 2022 to access the transfer node.
+ ssh -p 2022 username@farm.cse.ucdavis.edu
+ scp -P 2022 src username@farm.cse.ucdavis.edu:/destination
+
+   REMINDER: Farm does not back up user data. Please ensure your data is backed up offsite.
+
+ *** Dec 04 2019:
+ * 2:10pm - Service restored. Please report any issues to help@cse.ucdavis.edu.
+
+
+   Email help@cse.ucdavis.edu for help with Farm.
+
+Downtime scheduled for the first Wednedsay of Oct and April.  The next downtime is Wednesday April 1st at 11:59pm.
+
+If interested in contributing to farm, the rates for 5 years are:
+  $ 1,000 per 10TB, served from redundant servers with compression
+  $ 8,800 per parallel node (256GB ram, 32 cores/64 threads, 2TB /scratch)
+  $17,500 per GPU node (Nvidia Telsa V100, dual Xeon 4114, 2TB /scratch)
+  $22,700 per bigmem node (1TB ram, 48 cores/96 threads, 2TB /scratch)
+
+Last login: Thu Jan  2 17:01:36 2020 from 76.105.143.194
+Module slurm/19.05.3 loaded
+Module openmpi/4.0.1 loaded
+username@farm:~$
+```
+
+When you first login to farm, you will be in your home directory.
+This is where you will write your files and run the majority of your commands. 
