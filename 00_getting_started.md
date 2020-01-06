@@ -11,7 +11,7 @@ During this rotation, you will learn how to:
  + determine the taxonomic composition of sequencing reads
  + assemble and annotate metagenomic reads
  + quickly compare large sequencing datasets
- + how to document workflows using git and GitHub. 
+ + document workflows using git and GitHub. 
  
 The files in this repository are ordered by execution, meaning file `00*` should be completed before `01*`. 
 
