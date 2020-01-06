@@ -146,7 +146,7 @@ acceptable (yellow), and bad (red) quality scores.
 
 Now let's take a look at a quality plot on the other end of the spectrum. 
 
-![](_/static/bad_quality1.8.png)
+![](_static/bad_quality1.8.png)
 
 Here, we see positions within the read in which the boxes span a much wider range. 
 Also, quality scores drop quite low into the "bad" range, particularly on the tail end of the reads. 
