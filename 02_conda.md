@@ -3,3 +3,5 @@
 These videos cover the material in the above tutorial: 
 + [video 1](https://www.youtube.com/watch?v=Ef1QwhELuMs)
 + [video 2](https://www.youtube.com/watch?v=MOlYlvBBa9c) (there were some technical issues with this recording...sorry!)
+
+Please use the above materials to set up a conda environment on farm called `dib_rotation`. Inside of the environment, please install `sourmash`.
