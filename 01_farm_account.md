@@ -30,8 +30,8 @@ cd ~/.ssh
 
 If this command does not work, create your own `ssh` folder and `cd` into it:
 ```
-mkdir -p ssh
-cd ssh
+mkdir -p ~/.ssh
+cd ~/.ssh
 ```
 
 Then, generate the keyfile pair by running:
