@@ -45,6 +45,8 @@ Two files will be created by this command.
 These files should have the same prefix.
 The file that ends in `.pub` is the public key.
 
+### [The account request form](https://wiki.cse.ucdavis.edu/cgi-bin/index2.pl)
+
 Next, navigate to [this page](https://wiki.cse.ucdavis.edu/cgi-bin/index2.pl).
 From the first drop down menu (Which cluster are you applying for an account on?), select `FARM/CAES`.
 From the second drop down menu (Who is sponsoring your account?), select `Brown, C. Titus`.
@@ -88,7 +90,7 @@ From outside the Farm cluster use port 2022 to access the transfer node.
 
    Email help@cse.ucdavis.edu for help with Farm.
 
-Downtime scheduled for the first Wednedsay of Oct and April.  The next downtime is Wednesday April 1st at 11:59pm.
+Downtime scheduled for the first Wednesday of Oct and April.  The next downtime is Wednesday April 1st at 11:59pm.
 
 If interested in contributing to farm, the rates for 5 years are:
   $ 1,000 per 10TB, served from redundant servers with compression
