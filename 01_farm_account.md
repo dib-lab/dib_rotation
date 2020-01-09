@@ -36,7 +36,7 @@ cd ~/.ssh
 
 Then, generate the keyfile pair by running:
 ```
-ssh-keygen –t rsa
+ssh-keygen
 ```
 
 Follow the prompts on the screen. If prompted for a password, you can hit `Enter` on your keyboard to avoid setting one.
