@@ -106,3 +106,9 @@ username@farm:~$
 
 When you first login to farm, you will be in your home directory.
 This is where you will write your files and run the majority of your commands. 
+
+When you are done using farm, you can exit your ssh connection with the `exit` command.
+
+```
+exit
+```
