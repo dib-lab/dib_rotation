@@ -1,6 +1,6 @@
 Welcome to your DIB-lab rotation project! 
 All resources needed to learn a metagenomics workflow are contained within this repository. 
-If you see a mistake or something is not clear, please submit an [issue](https://github.com/taylorreiter/dib_rotation/issues). 
+If you see a mistake or something is not clear, please submit an [issue](https://github.com/dib-lab/dib_rotation/issues). 
 
 During this rotation, you will learn how to:
  + interact with an HPC (we'll use [Farm](https://www.hpc.ucdavis.edu/posts/about_farm/))
