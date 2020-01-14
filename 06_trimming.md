@@ -46,6 +46,80 @@ We include some of these studies below.
 
 ## Adapter trimming
 
+We saw using FastQC that the Illumina Universal Adapter was present in our sample. 
+
+![](_static/adapter_content_R1.png)
+
+We also saw that the sequence read quality dropped dramatically toward the end of the read.
+
+![](_static/per_base_seq_qual_R1.png)
+
+We will remove both of these sequences using Trimmomatic. 
+
+Trimmomatic doesn't take very much RAM, but it will perform faster with more threads (CPUs). 
+Here's an examples `srun` command to start an interactive job on a slurm cluster in which to run the trimmomatic commands:
+
+```
+srun -p bmh -J trim -t 10:00:00 --mem=8gb -c 2 --pty bash
+```
+
+Once you're in an `srun` session, activate your rotation environment and install trimmomatic
+
+```
+conda activate dib_rotation
+conda install -y trimmomatic
+```
+
+We can now trim our data!
+Let's set up our directory structure:
+
+```
+cd ~/2020_rotation_project
+mkdir -p trim
+cd trim
+```
+
+And link in our raw data.
+```
+ln -s ~/2020_rotation_project/raw_data/*fastq.gz .
+```
+
+We also need an `adapters.fa` file that contains the Illumina Universal Adapter.
+We've created an adapter file that contains many (all?) of the Illumina adapters so it can be used to adapter trim across experiments.
+
+```
+wget https://raw.githubusercontent.com/dib-lab/dib_rotation/master/_static/adapters.fa
+```
+
+We can now use trimmomatic to adapter and quality trim our data.
+
+```
+trimmomatic PE SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz \
+        SRR1976948_1.trim.fastq.gz SRR1976948_1.se.fastq.gz \
+        SRR1976948_2.trim.fastq.gz SRR1976948_2.se.fastq.gz \
+        ILLUMINACLIP:adapters.fa:2:30:15 \
+        LEADING:2 TRAILING:2 \
+        SLIDINGWINDOW:4:2 \
+        MINLEN:25
+```
+
+> **Command Breakdwon**
+> 
+> Trimmomatic is a java program that we call from the command line. Each arguments is followed by a colon, and then its value.
+> * `PE` - this is specified because we are working with paired-end data with forward and reverse reads.
+> * `SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz ` - the first two positional argument we are providing are the input fastq files. 
+> * `SRR1976948_1.trim.fastq.gz` - the next positional argument specifies the output file name for forward paired-end sequences that survive trimming and whose mate survives trimming.
+> * `SRR1976948_1.se.fastq.gz` - the next positional argument specifies the output file name for forward paired-end sequences that survive trimming but whose mate does not survive trimming. These files are then repeated fro the reverse sequence.
+> * `ILLUMINACLIP:TruSeq2-SE.fa:2:30:15` - the argument "ILLUMINACLIP" the file that contains the adapter sequences, then 3 numbers: "2" which states how many mismatches between the adapter sequence and what's found are allowed; "30" species how similar adapters in forward and reverse reads must be; and "15" which specifies how accurate the match must be
+> * `LEADING:2 TRAILING:2` - both of these state the minimum quality score at the start or end of the read, if lower, it will be trimmed off
+> * `SLIDINGWINDOW:4:2` - this looks at 4 basepairs at a time, and if the average quality of that window of 4 drops below 2, the read is trimmed there
+> * `MINLEN:25` - after all the above trimming steps, if the read is shorter than 25 bps, it will be discarded
+
+We only trim sequences with a low quality score of 2.
+Recall from our FastQC lesson that a quality score of 10 indicates a 1 in 10 chance that the base is inaccurate. 
+A score of 20 is a 1 in 100 chance that the base is inaccurate. 30 is 1 in 1,000. And 40 in 1 in 10,000. 
+By using a score of 2, we are more likely to keep data that has a high probability of being accurate. 
+
 ## k-mer trimming
 
 Next, let's k-mer trim our data. 
@@ -66,15 +140,14 @@ conda install -y khmer
 Once `khmer` is installed, we can use it for k-mer trimming. 
 Let's get our files and directories set up 
 ```
-cd ~
-cd 2020_rotation_project
-mkdir abund_trim
+cd ~/2020_rotation_project
+mkdir -p abund_trim
 cd abund_trim
 ```
 
 And link in our files from adapter trimming.
 ```
-ln -s ../adapter_trim/*fq.gz .
+ln -s ../trim/*trim.fastq.gz .
 ```
 
 Then we can run k-mer trimming!
