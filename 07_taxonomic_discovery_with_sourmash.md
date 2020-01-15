@@ -63,8 +63,50 @@ sourmash compute -o SRR1976948.sig --merge SRR1976948 --scaled 2000 -k 21,31,51 
 The outputs file, `SRR1976948.sig` holds a representative subset of k-mers from our original sample, as well as their abundance information. 
 The k-mers are "hashed", or transformed, into numbers to make selecting, storing, and looking up the k-mers more efficient.
 
-## Sourmash XXX gather
+## Sourmash lca gather
 
+Sourmash provides two methods for estimating the taxonomic composition of known sequences in a metagenome, `sourmash gather` and `sourmash lca gather`. 
+`sourmash gather` gives strain-level specificity to matches in its output -- e.g. all strains that match any sequences (above a threshold) in your metagenome will be reported, along with the percent of each strain that matches. 
+This is useful both to estimate the amount of your metagenome that is known, and to estimate the closest strain relative to the thing that is in your metagenome. 
+`sourmash lca gather` provides a similar output, but also provides taxonomic information for the match.
+This means that both an assembly and a taxonomy are required for inclusion in the database. 
+Because of the underlying data structures, `sourmash lca gather` is faster, but also requires more computational power.
+Farm has plenty of resources, so we will run the faster command.
+
+```
+sourmash lca gather -o SRR1976948_lca_gather.csv SRR1976948.sig genbank-k31.lca.json
+```
+
+We see an output that looks like this:
+
+```
+== This is sourmash version 3.0.1. ==
+== Please cite Brown and Irber (2016), doi:10.21105/joss.00027. ==
+
+loaded 1 LCA databases. ksize=31, scaled=10000
+selecting specified query k=31
+loaded query: SRR1976948... (k=31)
+
+overlap     p_query p_match
+---------   ------- --------
+2.5 Mbp       0.2%   96.9%      unassigned Methanomicrobiales archaeon 53_19
+2.4 Mbp       0.2%   99.2%      Methanobacterium sp. 42_16
+2.3 Mbp       0.2%  100.0%      Desulfotomaculum sp. 46_80
+2.3 Mbp       0.2%  100.0%      unassigned Actinobacteria bacterium 66_15
+2.1 Mbp       0.2%   97.7%      Desulfotomaculum sp. 46_296
+2.1 Mbp       0.2%   99.0%      Methanosaeta harundinacea
+2.0 Mbp       0.2%   99.0%      unassigned Marinimicrobia bacterium 46_43
+1.9 Mbp       0.2%  100.0%      unassigned Bacteroidetes bacterium 38_7
+1.9 Mbp       0.2%   55.1%      unassigned Thermotogales bacterium EBM-48
+```
+
+The first column estimates the amount of sequences in our metagenome that are contained in the match, while the second column estimates the amount of the match that is contained within our metagenome.
+These percentages are quite high in the `p_match` column...that's because the authors who originally analyzed this sample deposited metagenome-assembled genomes from this sample into GenBank. 
+
+When sourmash is finished running, it tells us that 94% of our sequence was unclassified; i.e. it doesn't match any sequence in the database.
+This is common for metagenomics, particularly for samples that are sequenced from rare environments (like Alaskan oil reservoirs).
+
+In the next lesson, we will work to improve the percent of sequence in the metagenome that is classifiable.
 
 ## Final Thoughts
 
@@ -72,3 +114,12 @@ There are many tools like Kraken and Kaiju that can do taxonomic classification 
 these seem to perform well (albeit with high false positive rates) in situations where you don’t necessarily have the genome sequences that are in the metagenome. 
 Sourmash, by contrast, can estimate which known genomes are actually present, so that you can extract them and map/align to them. 
 It seems to have a very low false positive rate and is quite sensitive to strains.
+
+## Bonus (optional) sourmash lca gather
+
+Above, we ran `sourmash lca gather` on our untrimmed data. 
+94% of the sample did not contain sequence in any GenBank assembly. 
+A substantial proportion of this sequence could be due to errors.
+Run `sourmash lca gather` again on your adapter and k-mer trimmed data.
+How much less of the sequence is unclassifiable when the errors and adapters are removed?
+How many species are no longer detected after k-mer and error trimming?
