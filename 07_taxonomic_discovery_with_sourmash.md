@@ -5,7 +5,7 @@ Now we will begin performing analysis that makes sense for metagenomic sequencin
 We are working with a sample from an Alaskan Oil Reservoir named SB1. 
 We know from reading the [Hu et al. paper](https://mbio.asm.org/content/7/1/e01669-15) that this sample contains bacteria and archaea. 
 However, let's pretend that this is a brand new sample that we just got back from our sequencing core. 
-One of the first things we often want to do wtih new metagenome sequencing samples is figure out their approximate species composition. 
+One of the first things we often want to do with new metagenome sequencing samples is figure out their approximate species composition. 
 This allows us to tap in to all of the information known about these species and relate our community to existing literature. 
 
 We can determine the approximate composition of our sample using `sourmash`. 
@@ -14,7 +14,7 @@ We can determine the approximate composition of our sample using `sourmash`.
 
 Please read [this tutorial](https://angus.readthedocs.io/en/2019/sourmash.html) for an introduction to how sourmash works. 
 
-tl;dr (but actually please read it): sourmash breaks nucleotide sequences down into small pieces.
+tl;dr (but actually please read it): sourmash breaks nucleotide sequences down into small pieces, and then searches for those small pieces in databases.
 This makes it really fast to make comparisons. Here, we will compare our metagenome sample against a pre-prepared database that contains all microbial sequences in GenBank
 
 ## Starting with sourmash
@@ -70,7 +70,7 @@ Sourmash provides two methods for estimating the taxonomic composition of known 
 This is useful both to estimate the amount of your metagenome that is known, and to estimate the closest strain relative to the thing that is in your metagenome. 
 `sourmash lca gather` provides a similar output, but also provides taxonomic information for the match.
 This means that both an assembly and a taxonomy are required for inclusion in the database. 
-Because of the underlying data structures, `sourmash lca gather` is faster, but also requires more computational power.
+Because of the underlying data structures, `sourmash lca gather` is faster, but also requires more memory.
 Farm has plenty of resources, so we will run the faster command.
 
 ```
