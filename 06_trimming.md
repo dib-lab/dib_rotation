@@ -155,6 +155,6 @@ The first line of this command interleaves our paired end reads, putting them in
 The second line of this command performs the k-mer trimming. 
 
 ```
-interleave-reads.py ${i}_1.fastq.gz ${i}_2.fastq.gz | 
-        trim-low-abund.py --gzip -C 3 -Z 18 -M 20e9 -V - -o $i.abundtrim.fq.gz
+interleave-reads.py SRR1976948_1.trim.fastq.gz SRR1976948_2.trim.fastq.gz | 
+        trim-low-abund.py --gzip -C 3 -Z 18 -M 20e9 -V - -o SRR1976948.abundtrim.fq.gz
 ```
