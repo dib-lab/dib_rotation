@@ -225,4 +225,22 @@ When it is finished, you will have three folders in your directory:
 + `SRR1976948_k31_r1`: contains the spacegraphcats data structures
 + `SRR1976948_k31_r1_search_oh0`: contains the output of the query, including the contigs (single paths) from the cDBG, the reads that contain k-mers in those contigs, and a sourmash signature from the contigs.
 
+## Comparing the query to the neighborhood
+
+Let's explore how similar the query is to the neighborhood we extracted with it.
+
+We will use sourmash to do this. We already have a sourmash signature our neighborhood that was output by spacegraphcats.
+Let's make a signature for our query as well, and then use `sourmash compare` to compare them.
+
+```
+sourmash compute -k 21,31,51 --scaled 2000 -o GCA_001508995.1_ASM150899v1_genomic.sig GCA_001508995.1_ASM150899v1_genomic.fna.gz
+```
+
+```
+sourmash compare -k 31 --csv comp1 *sig SRR1976948_k31_r1_search_oh0/*sig
+```
+
+How similar are these two signatures? 
+Did spacegraphcats add any additional sequence to this query?
+
 
