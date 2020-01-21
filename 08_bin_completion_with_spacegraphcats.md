@@ -151,3 +151,50 @@ The structure on the right is much easier to query into.
 
 Spacegraphcats queries work by decomposing the query into k-mers, finding the node in which a query k-mer is contained within the spacegraphcats graph, and returning all of the k-mers in that node. 
 This process is efficient enough to work on the whole metagenome for every k-mer in the query.
+
+## Running spacegraphcats
+
+Let's try this out on our metagenome! 
+First, let's install spacegraphcats.
+We're going to create a new environment for spacegraphcats, and follow the installation instructions from the spacegraphcats github repository.
+
+Make sure you start from the base environment.
+If you're in another environment (e.g. `dib_rotation`), run `conda deactivate`.
+
+```
+cd ~
+git clone https://github.com/spacegraphcats/spacegraphcats/
+conda env create -f spacegraphcats/environment.yml -n sgc
+conda activate sgc
+```
+
+Next, we need to decide what query we'd like to use. 
+Let's try *Desulfotomaculum sp. 46_80*, which we saw from sourmash is 100% present in the metagenome
+
+```
+2.3 Mbp       0.2%  100.0%      Desulfotomaculum sp. 46_80
+```
+
+We first have to find this genome sequence. 
+To do this, we can go to [NCBI taxonomy browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi) and search for `Desulfotomaculum sp. 46_80`.
+We see that this takes us to a new page.
+On the right hand side of the screen, there should be a box. 
+Click the `1` that's in the `Assembly` row, and this will take us to the genome bin assembly record.
+Then, on the right hand side, click `FTP directory for GenBank assembly`.
+This takes us to the FTP site for this assembly. 
+We can download the assembly to FARM using `wget` and the link address for the file we want.
+Here, we want the `*.fna.gz` file, as this contains the nucleotides from the metagenome-assembled genome.
+
+```
+cd ~/2020_rotation_project
+mkdir -p sgc
+cd sgc
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/508/995/GCA_001508995.1_ASM150899v1/GCA_001508995.1_ASM150899v1_genomic.fna.gz
+```
+
+Now that we have our query, we need to construct a configuration file that spacegraphcats will use to run.
+
+
+
+
+
