@@ -158,6 +158,11 @@ Let's try this out on our metagenome!
 First, let's install spacegraphcats.
 We're going to create a new environment for spacegraphcats, and follow the installation instructions from the spacegraphcats github repository.
 
+First, start an `srun` session
+```
+srun -p bmh -J sgc -t 48:00:00 --mem=40gb -c 2 --pty bash
+```
+
 Make sure you start from the base environment.
 If you're in another environment (e.g. `dib_rotation`), run `conda deactivate`.
 
@@ -193,8 +198,24 @@ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/508/995/GCA_001508995.1_ASM1
 ```
 
 Now that we have our query, we need to construct a configuration file that spacegraphcats will use to run.
+This file specifies the name of the spacegraphcats data structure (`catlas_base`), the filepaths for the metagenome reads and the query sequence, the k-mer size at which to build the cDBG, and the "radius" (or size) at which to perform the queries.
 
+```
+catlas_base: 'SRR1976948'
+input_sequences:
+- ~/2020_rotation_project/abundtrim/SRR1976948.abundtrim.fq.gz
+ksize: 31
+radius: 1
+search:
+- ~/2020_rotation_project/spacegraphcats/GCA_001508995.1_ASM150899v1_genomic.fna.gz
+searchquick: ~/2020_rotation_project/spacegraphcats/GCA_001508995.1_ASM150899v1_genomic.fna.gz
+```
 
+Use a text editor such as nano or vim to generate this file, and call it `conf1.yml`
 
+Now we're ready to run spacegraphcats!
 
+```
+python -m spacegraphcats conf1.yml extract_contigs extract_reads --nolock 
+```
 
