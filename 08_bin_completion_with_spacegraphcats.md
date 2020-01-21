@@ -219,3 +219,10 @@ Now we're ready to run spacegraphcats!
 python -m spacegraphcats conf1.yml extract_contigs extract_reads --nolock 
 ```
 
+This will take a while to run. 
+When it is finished, you will have three folders in your directory: 
++ `SRR1976948`: contains the cDBG
++ `SRR1976948_k31_r1`: contains the spacegraphcats data structures
++ `SRR1976948_k31_r1_search_oh0`: contains the output of the query, including the contigs (single paths) from the cDBG, the reads that contain k-mers in those contigs, and a sourmash signature from the contigs.
+
+
