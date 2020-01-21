@@ -58,7 +58,7 @@ Any genome match that ends in two numbers separated by an underscore (e.g. 46_43
 Even with the exact genomes in our sample in the database, we were only able to classifly 90% of the k-mers in our sample.
 This leaves a lot of data on the table.
 
-3) **Contingue with gene-level analysis.** Often times, many more contigs will assemble than will bin. 
+3) **Continue the analysis with gene-level techniques.** Often times, many more contigs will assemble than will bin. 
 In cases like this, it's possible to do a gene-level analysis of a metagenome where you annotate open reading frames (ORFs) on the assembled contigs.
 This type of analysis can give you an idea of the functional potential in our metagenome.
 
@@ -66,11 +66,11 @@ This type of analysis can give you an idea of the functional potential in our me
 If something has no known reference and doesn't assemble or bin, what can you do? 
 There are many tools that work directly on metagenome reads to estimate taxonomy or function (e.g. gene identity).
 These tools include Kraken and mifaser. 
-We've had varying degrees of success this this type of approach, depending on the sample being analyzed.
+We've had varying degrees of success with this type of approach, depending on the sample being analyzed.
 
 5) **Exploit connectivity of DNA sequences to assign more reads to the pangenome of sourmash matches.**
 We can do this with a tool called spacegraphcats.
-The rest of this lesson covers background knowledge for this approach and why it works, and gives an step-by-step guide of how to do it.
+The rest of this lesson covers background knowledge for this approach and why it works, and gives a step-by-step guide of how to do it.
 
 ## Representing all the k-mers: de Bruijn graphs and compact de Bruijn graphs
 
