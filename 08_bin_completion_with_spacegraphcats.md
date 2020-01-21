@@ -31,8 +31,8 @@ Even if a sequence had 30 basepairs exactly in common with another sequence, if 
 Aligning reads to close relatives is a more lenient approach, and could lead to 5-10% more reads being classified.
 This is pretty good, but there are ways to do better.
 2) ***de novo* assemble and bin the reads into metagenome assembled genomes.**
-**de novo** assembly and binning are reference-free approaches to produce metagenome-assembled genomes (bins) from metagenome reads.
-**de novo** assembly works by finding overlaps between reads and assembling them into larger "contiguous sequences" (usually shortened to contigs).
+*de novo* assembly and binning are reference-free approaches to produce metagenome-assembled genomes (bins) from metagenome reads.
+*de novo* assembly works by finding overlaps between reads and assembling them into larger "contiguous sequences" (usually shortened to contigs).
 Depending on the depth, coverage, and biological properties of a sample, these contigs range in size from 500 base pairs to hundreds of thousands of base pairs.
 These assemblies can then be binned into metagenome-assembled genomes. Most binners use tetranucleotide frequency and abundance information to bin contigs.
 A tetranucleotide is a 4 base pair sequence within a genome.
@@ -47,11 +47,11 @@ This second scenario can occur when there are a lot of errors in the reads, or w
 In either case, the assembly breaks and outputs fragmented contigs, or no contigs at all.
 Although tetranucleotide frequency and abundance information are strong signals, tetranucleotide frequency can only be reliably estimated on contigs that are >2000 base pairs.
 Because many things fail to assemble to that length, they are not binned. 
-To give an idea of how much is missed by **de novo** asesembly and binning, consider our sourmash results.
-The sample that we are analyzing was originally analyzed with a **de novo** assembly and binning pipeline.
+To give an idea of how much is missed by *de novo* asesembly and binning, consider our sourmash results.
+The sample that we are analyzing was originally analyzed with a *de novo* assembly and binning pipeline.
 The high-quality bins were then uploaded to GenBank and are now part of the database. 
 Look at the sourmash output (above). 
-Any genome match that ends in two numbers separated by an underscore (e.g. 46_43) is a **de novo** metagenome-assembled genome produced by the original analysis.
+Any genome match that ends in two numbers separated by an underscore (e.g. 46_43) is a *de novo* metagenome-assembled genome produced by the original analysis.
 Even with the exact genomes in our sample in the database, we were only able to classifly 90% of the k-mers in our sample.
 This leaves a lot of data on the table.
 3) **Contingue with gene-level analysis.** Often times, many more contigs will assemble than will bin. 
@@ -63,3 +63,29 @@ There are many tools that work directly on metagenome reads to estimate taxonomy
 These tools include Kraken and mifaser. 
 We've had varying degrees of success this this type of approach, depending on the sample being analyzed.
 5) **Exploit connectivity of DNA sequences to assign more reads to the pangenome of sourmash matches.**
+We can do this with a tool called spacegraphcats.
+The rest of this lesson covers background knowledge for this approach and why it works, and gives an step-by-step guide of how to do it.
+
+## Representing all the k-mers: de Bruijn graphs and compact de Bruijn graphs
+
+In real life, DNA sequences are fully contiguous within a genome (or chromosome). 
+When we chop a genome up into little pieces to sequence it, we lose this connectivity information.
+In order to get this connectivity information back to create an assembly, we must find every possible set of overlaps between all reads.
+This information is often represented in a de Bruijn graph.
+A de Bruijn graph is built by chopping sequencing data into k-mers and finding all overlaps of size k-1 between all k-mers.
+The graph below demonstrates this process.
+Each node in the graph represents a k-mer (here of size 4), and each arrows represents that two k-mers overlap by k-1 nucleotides (here, by 3 nucleotides). 
+Each k-mer only occurs in the graph once.
+
+![source: Brief Bioinform. 2018 Jan 1;19(1):23-40. doi: 10.1093/bib/bbw096.](_static/A-In-the-de-Bruijn-graph-approach-short-reads-are-split-into-short-k-mers-before-the.png)
+
+A compact de Bruijn graph (cDBG) is built from the de Bruijn graph by collapsing all linear paths of k-mers into a single node.
+Every k-mer still only occurs once in the graph, but now nodes grow in size to be greate than k.
+
+![](_static/cdbg.png)
+
+Both DBGs and cDBGs contain every k-mer from a sample. 
+What's more, with a large enough k-mer size (e.g. 31), k-mers from the same genome tend to be connected within the graph because they are connected within the real genome. 
+spacegraphcats takes advantage of this information to reassociate k-mers that belong together but were not recovered by assembly.
+
+
