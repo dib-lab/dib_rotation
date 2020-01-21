@@ -124,3 +124,30 @@ Yet we see from bubbles and offshoots in the graph that even when *pcrA* is cont
 
 ![source: ISME J 12, 1568–1581 (2018) doi:10.1038/s41396-018-0081-5](_static/41396_2018_81_Fig4_HTML.png)
 
+## Scaling it up
+
+The study we were looking at above looked for genes involved in dissimilatory perchlorate reduction using manual curation -- 
+e.g. they built a cDBG for each sample, visualized it with a tool called Bandage, then used BLAST to find their genes of interest.
+This approach is great, but incredibly time consuming and difficult to automate. 
+What's more, this approach does not scale. 
+Given the complexity of cDBGs, each "query" (e.g. look up within the graph) takes a lot of computational resources.
+As such, although this approach is tractable for a few genes (and shows really cool results at that scale!), it wouldn't work for every gene that is assembled in a metagenome. 
+But imagine if it could!
+Using *de novo* approaches, most bins are not 100% complete. 
+What if we could use a whole bin as a query, and pull out its context within a cDBG?
+We could "complete" a bin by pulling all the things that didn't assemble or bin, but that through close location in the cDBG, we know belongs with the bin.
+
+Enter spacegraphcats. 
+Spacegraphcats uses a novel data structure to represent the cDBG with less complexity while maintaining biological relationships between the sequences. 
+It then uses novel algorithms that exploit properties of the cDBG to quickly query into the data structure.
+
+To visualize this, let's look at a cDBG of an *Escherichia coli* genome + errors 
+(this is an isolate, so we're using the errors to simulate strain variation in a real metagenome community. 
+It's a rough approximation that works well for visualizing what spacegraphcats does under the hood). 
+On the left is the cDBG, and on the right is the simplified structure produced by spacegraphcats.
+The structure on the right is much easier to query into.
+
+![](_static/ecoli_cdbg_sgc.png)
+
+Spacegraphcats queries work by decomposing the query into k-mers, finding the node in which a query k-mer is contained within the spacegraphcats graph, and returning all of the k-mers in that node. 
+This process is efficient enough to work on the whole metagenome for every k-mer in the query.
