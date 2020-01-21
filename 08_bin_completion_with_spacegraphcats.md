@@ -94,4 +94,33 @@ Both DBGs and cDBGs contain every k-mer from a sample.
 What's more, with a large enough k-mer size (e.g. 31), k-mers from the same genome tend to be connected within the graph because they are connected within the real genome. 
 spacegraphcats takes advantage of this information to reassociate k-mers that belong together but were not recovered by assembly.
 
+## Sequence context in a cDBG
+
+As outlined above, many reads do not match known references, don't assemble, and/or don't bin. 
+What if this occurs in a region that you particularly care about?
+How can we use the fact that all k-mers in a metagenome are contained within a cDBG to get more information about our region of interest?
+
+Look at the figure below. 
+The first part of the abstract of this study states:
+
+```
+Dissimilatory perchlorate reduction is an anaerobic respiratory pathway that in communities might 
+be influenced by metabolic interactions. Because the genes for perchlorate reduction are horizontally 
+transferred, previous studies have been unable to identify uncultivated perchlorate-reducing 
+populations. Here we recovered metagenome-assembled genomes from perchlorate-reducing sediment 
+enrichments and employed a manual scaffolding approach to reconstruct gene clusters for perchlorate 
+reduction found within mobile genetic elements. 
+```
+
+Essentially, the authors of this study new that dissimilatory perchlorate reduction was important in their microbial communities of interest.
+But because perchlorate reduction genes are horizontally transferred, they're hard to identify in metagenomic sequencing data.
+This is likely because strain variation (e.g. small differences in the same genes in different organisms in a community) around these genes broke assembly.
+However, given their importance, the authors of this study new that they *should* be present in the metagenome.
+Therefore, they dug into the cDBG that contained all metagenome reads, and were able to see the sequence context of their genes of interest. 
+We see that because these genes are horizontally transferred, sometimes the sequence flanking their genes of interest comes from multiple species. 
+However, even in this case, regions of the sub-cDBG segregate to each species that contains the gene of interest.
+In other cases (e.g. at 7% salinity), only one organism flanks *pcrA*. 
+Yet we see from bubbles and offshoots in the graph that even when *pcrA* is contained only within one species, there is still variation that likely confounded assembly and binning. 
+
+![source: ISME J 12, 1568–1581 (2018) doi:10.1038/s41396-018-0081-5](_static/41396_2018_81_Fig4_HTML.png)
 
