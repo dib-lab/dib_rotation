@@ -26,7 +26,7 @@ overlap     p_query p_match
 
 ## Analysis options for metagenome samples
 
-To get more information out of a metagenomics sample, we have four options. 
+To get more information out of a metagenomics sample, we have five options. 
 1) **Align reads to the genomes that had sourmash matches.** sourmash performs exact matching of k-mers.
 K-mers of size 31 are fairly specific.
 Even if a sequence had 30 basepairs exactly in common with another sequence, if the 31st is different, it would not count as a match.
