@@ -1,7 +1,7 @@
 In the [previous lesson](07_taxonomic_discovery_with_sourmash.md), we used sourmash to determine the approximate taxonomic composition of our metagenome sample. 
 Sourmash performs quick exact matching between the k-mers in your sample and k-mers in a databases -- this means that a sequence must have been previously sequenced and be in a database in order for us to be able to label it in our sample. 
 We often cannot label a lot of the sequences in our sample, especially if that sample comes from a novel environment that has not be sequenced in the past. 
-We saw this in the previous lesson, where we were only able to classify ~90% of the reads in our sample.
+We saw this in the previous lesson, where we were only able to classify ~10% of the reads in our sample.
 
 ```
 == This is sourmash version 3.0.1. ==
@@ -55,7 +55,7 @@ The sample that we are analyzing was originally analyzed with a *de novo* assemb
 The high-quality bins were then uploaded to GenBank and are now part of the database. 
 Look at the sourmash output (above). 
 Any genome match that ends in two numbers separated by an underscore (e.g. 46_43) is a *de novo* metagenome-assembled genome produced by the original analysis.
-Even with the exact genomes in our sample in the database, we were only able to classify 90% of the k-mers in our sample.
+Even with the exact genomes in our sample in the database, we were only able to classify 10% of the k-mers in our sample.
 This leaves a lot of data on the table.
 
 3) **Continue the analysis with gene-level techniques.** Often times, many more contigs will assemble than will bin. 
