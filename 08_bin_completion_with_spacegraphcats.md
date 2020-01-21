@@ -24,12 +24,15 @@ overlap     p_query p_match
 1.9 Mbp       0.2%   55.1%      unassigned Thermotogales bacterium EBM-48
 ```
 
+## Analysis options for metagenome samples
+
 To get more information out of a metagenomics sample, we have four options. 
 1) **Align reads to the genomes that had sourmash matches.** sourmash performs exact matching of k-mers.
 K-mers of size 31 are fairly specific.
 Even if a sequence had 30 basepairs exactly in common with another sequence, if the 31st is different, it would not count as a match.
 Aligning reads to close relatives is a more lenient approach, and could lead to 5-10% more reads being classified.
 This is pretty good, but there are ways to do better.
+
 2) ***de novo* assemble and bin the reads into metagenome assembled genomes.**
 *de novo* assembly and binning are reference-free approaches to produce metagenome-assembled genomes (bins) from metagenome reads.
 *de novo* assembly works by finding overlaps between reads and assembling them into larger "contiguous sequences" (usually shortened to contigs).
@@ -54,14 +57,17 @@ Look at the sourmash output (above).
 Any genome match that ends in two numbers separated by an underscore (e.g. 46_43) is a *de novo* metagenome-assembled genome produced by the original analysis.
 Even with the exact genomes in our sample in the database, we were only able to classifly 90% of the k-mers in our sample.
 This leaves a lot of data on the table.
+
 3) **Contingue with gene-level analysis.** Often times, many more contigs will assemble than will bin. 
 In cases like this, it's possible to do a gene-level analysis of a metagenome where you annotate open reading frames (ORFs) on the assembled contigs.
 This type of analysis can give you an idea of the functional potential in our metagenome.
+
 4) **Continue the analysis with read-based techniques.**
 If something has no known reference and doesn't assemble or bin, what can you do? 
 There are many tools that work directly on metagenome reads to estimate taxonomy or function (e.g. gene identity).
 These tools include Kraken and mifaser. 
 We've had varying degrees of success this this type of approach, depending on the sample being analyzed.
+
 5) **Exploit connectivity of DNA sequences to assign more reads to the pangenome of sourmash matches.**
 We can do this with a tool called spacegraphcats.
 The rest of this lesson covers background knowledge for this approach and why it works, and gives an step-by-step guide of how to do it.
