@@ -203,12 +203,12 @@ This file specifies the name of the spacegraphcats data structure (`catlas_base`
 ```
 catlas_base: 'SRR1976948'
 input_sequences:
-- ~/2020_rotation_project/abundtrim/SRR1976948.abundtrim.fq.gz
+- ../abundtrim/SRR1976948.abundtrim.fq.gz
 ksize: 31
 radius: 1
 search:
-- ~/2020_rotation_project/spacegraphcats/GCA_001508995.1_ASM150899v1_genomic.fna.gz
-searchquick: ~/2020_rotation_project/spacegraphcats/GCA_001508995.1_ASM150899v1_genomic.fna.gz
+- GCA_001508995.1_ASM150899v1_genomic.fna.gz
+searchquick: GCA_001508995.1_ASM150899v1_genomic.fna.gz
 ```
 
 Use a text editor such as nano or vim to generate this file, and call it `conf1.yml`
