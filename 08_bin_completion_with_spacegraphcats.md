@@ -86,7 +86,7 @@ Each k-mer only occurs in the graph once.
 ![source: Brief Bioinform. 2018 Jan 1;19(1):23-40. doi: 10.1093/bib/bbw096.](_static/A-In-the-de-Bruijn-graph-approach-short-reads-are-split-into-short-k-mers-before-the.png)
 
 A compact de Bruijn graph (cDBG) is built from the de Bruijn graph by collapsing all linear paths of k-mers into a single node.
-Every k-mer still only occurs once in the graph, but now nodes grow in size to be greate than k.
+Every k-mer still only occurs once in the graph, but now nodes grow in size to be greater than k.
 
 ![](_static/cdbg.png)
 
@@ -112,10 +112,10 @@ enrichments and employed a manual scaffolding approach to reconstruct gene clust
 reduction found within mobile genetic elements. 
 ```
 
-Essentially, the authors of this study new that dissimilatory perchlorate reduction was important in their microbial communities of interest.
+Essentially, the authors of this study knew that dissimilatory perchlorate reduction was important in their microbial communities of interest.
 But because perchlorate reduction genes are horizontally transferred, they're hard to identify in metagenomic sequencing data.
 This is likely because strain variation (e.g. small differences in the same genes in different organisms in a community) around these genes broke assembly.
-However, given their importance, the authors of this study new that they *should* be present in the metagenome.
+However, given their importance, the authors of this study knew that they *should* be present in the metagenome.
 Therefore, they dug into the cDBG that contained all metagenome reads, and were able to see the sequence context of their genes of interest. 
 We see that because these genes are horizontally transferred, sometimes the sequence flanking their genes of interest comes from multiple species. 
 However, even in this case, regions of the sub-cDBG segregate to each species that contains the gene of interest.
