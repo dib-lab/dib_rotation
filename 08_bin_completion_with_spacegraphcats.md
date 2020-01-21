@@ -1,5 +1,5 @@
 In the [previous lesson](07_taxonomic_discovery_with_sourmash.md), we used sourmash to determine the approximate taxonomic composition of our metagenome sample. 
-Sourmash performs quick exact matching between the k-mers in your sample and k-mers in a databases -- this means that a sequence must have been previously sequenced and be in a database in order for us to be able to lable it in our sample. 
+Sourmash performs quick exact matching between the k-mers in your sample and k-mers in a databases -- this means that a sequence must have been previously sequenced and be in a database in order for us to be able to label it in our sample. 
 We often cannot label a lot of the sequences in our sample, especially if that sample comes from a novel environment that has not be sequenced in the past. 
 We saw this in the previous lesson, where we were only able to classify ~90% of the reads in our sample.
 
@@ -50,12 +50,12 @@ This second scenario can occur when there are a lot of errors in the reads, or w
 In either case, the assembly breaks and outputs fragmented contigs, or no contigs at all.
 Although tetranucleotide frequency and abundance information are strong signals, tetranucleotide frequency can only be reliably estimated on contigs that are >2000 base pairs.
 Because many things fail to assemble to that length, they are not binned. 
-To give an idea of how much is missed by *de novo* asesembly and binning, consider our sourmash results.
+To give an idea of how much is missed by *de novo* assembly and binning, consider our sourmash results.
 The sample that we are analyzing was originally analyzed with a *de novo* assembly and binning pipeline.
 The high-quality bins were then uploaded to GenBank and are now part of the database. 
 Look at the sourmash output (above). 
 Any genome match that ends in two numbers separated by an underscore (e.g. 46_43) is a *de novo* metagenome-assembled genome produced by the original analysis.
-Even with the exact genomes in our sample in the database, we were only able to classifly 90% of the k-mers in our sample.
+Even with the exact genomes in our sample in the database, we were only able to classify 90% of the k-mers in our sample.
 This leaves a lot of data on the table.
 
 3) **Continue the analysis with gene-level techniques.** Often times, many more contigs will assemble than will bin. 
@@ -198,7 +198,7 @@ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/508/995/GCA_001508995.1_ASM1
 ```
 
 Now that we have our query, we need to construct a configuration file that spacegraphcats will use to run.
-This file specifies the name of the spacegraphcats data structure (`catlas_base`), the filepaths for the metagenome reads and the query sequence, the k-mer size at which to build the cDBG, and the "radius" (or size) at which to perform the queries.
+This file specifies the name of the spacegraphcats data structure (`catlas_base`), the file paths for the metagenome reads and the query sequence, the k-mer size at which to build the cDBG, and the "radius" (or size) at which to perform the queries.
 
 ```
 catlas_base: 'SRR1976948'
