@@ -89,8 +89,106 @@ First, download amino acid sequences in the query.
 Not every GenBank record has translated amino acid sequences, but because ours does, we can use them.
 
 ```
-cd ~/dib_rotation/plass
+cd ~/2020_rotation_project
+mkdir -p blast
+cd blast
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/508/995/GCA_001508995.1_ASM150899v1/GCA_001508995.1_ASM150899v1_protein.faa.gz
+gunzip GCA_001508995.1_ASM150899v1_protein.faa.gz
 ```
 
 There are many, many ways that we could compare the amino acid sequences between the two sequences. 
+
+We could use `sourmash compute` with the `--protein` flag to generate signatures for both of our amino acid fasta files, and then use `sourmash compare` to compare them. 
+Since we've used `sourmash` quite a bit, let's take a different approach that will give us a more detailed answer.
+
+We'll use BLAST to compare all of the protein sequences in our PLASS assembly to all of the protein sequences in the GenBank assembly. 
+We just downloaded the GenBank assembly amino acid sequences to our `blast` folder, let's link in our PLASS amino acid assembly.
+
+```
+ln -s ../plass/query_nbhd_plass.clean.fa .
+```
+
+Next, we need to install BLAST into our environment.
+Make sure you're in your `dib_rotation` environment.
+If you're not, run `conda activate dib_rotation`.
+
+```
+conda install blast
+```
+
+Now we can use BLAST to compare our two sequences!
+BLAST has many options for comparing sequences.
+`blastn` compares nucleotide sequences against nucleotide squences.
+`blastp` compares protein sequences against protein sequences.
+`blastx` compares nucleotide sequences against protein sequences.
+`tblastn` compares protein sequences against nucleotide sequences.
+We'll use `blastp` since we are dealing with two amino acid fasta files.
+We'll also use the `-query`/`-subject` format for our BLAST command instead of using a BLAST database.
+This will allow us to BLAST two sequences together without needing to build our own database.
+(If you would like to learn how to build a BLAST database, see [this tutorial](https://angus.readthedocs.io/en/2019/cloud_computing_intro.html)).
+We will also use the flag `-outfmt 6` which will give us our results in tab-delineated format.
+
+```
+blastp -query query_nbhd_plass.clean.fa -subject GCA_001508995.1_ASM150899v1_protein.faa -outfmt 6 -out query_nbhd_blast.tab
+```
+
+Now that we have our BLAST results, we can analyze them in R.
+(Feel free to re-implement a similar approach in python if you don't like R!)
+We are looking for matches that are 100% identical between our query and our subject.
+
+R has a lot of dependencies. 
+Let's make a new environment to keep those packages separate from our other tools.
+We'll install two R packages, which will bring along all of the R dependencies.
+`dplyr` has a set of functions for manipulating and formatting dataframes (like our BLAST table),
+and `Biostrings` makes reading amino acid sequences simple.
+
+```
+conda deactivate
+conda create -n renv  r-dplyr=0.8.3  bioconductor-biostrings=2.54.0 
+```
+
+Once installed, activate the new environment
+```
+conda activate renv
+```
+
+and then start an R session by running:
+```
+R
+```
+
+Once inside of the R session, you should see a new prompt that looks like this: `>`
+
+Run the following code to analyze the BLAST results.
+Look at the comments to see what each line of code does.
+Read PLASS assemblies into R with Biostrings to get the correct count of the number of amino acids in the assembly.
+
+```
+library(Biostrings)  # import biostrings functions into current environment
+library(dplyr)       # import dplyr functions into current environment
+
+nbhds <- list.files("explore/blast_plass_bin/plass-hardtrim", ".dup$", full.names = T)
+nbhd_names <- list.files("explore/blast_plass_bin/plass-hardtrim", ".dup$")
+nbhds <- lapply(nbhds, readAAStringSet) # import the plass nbhds
+nbhd_aas <- sapply(nbhds, length) # get the number of AAs in each nbhd
+
+blast <- list.files("explore/blast_plass_bin/", ".tab$", full.names = T)
+blast <- lapply(blast, read.table) # import blast
+
+tmp <- data.frame()
+df <- data.frame()
+for(i in 1:length(blast)){
+  tmp <- blast[[i]] %>%
+          filter(V3 == 100) # retain only AAs that were 100%
+  tmp_length <- length(unique(tmp$V1))  # count num aas 100% contained
+  # XX prots in PLASS are 100% contained in the bin prots
+  df[i, 'plass_in_bin'] <- tmp_length
+  df[i, 'bin'] <- nbhd_aas[i]
+  df[i, 'name'] <- nbhd_names[i]
+}
+
+
+df$f_plass_100_contained_in_bin <- df$plass_in_bin / df$bin # calc percent for each
+sum(df$f_plass_100_contained_in_bin)/23 # calc average
+
+```
