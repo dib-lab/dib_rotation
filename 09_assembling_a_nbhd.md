@@ -77,3 +77,16 @@ Many programs truncate amino acid (or any fasta sequence names) at the first spa
 ```
 ```
 
+## Comparing amino acid sequences in our neighborhood to those in the query
+
+Let's compare the amino acid sequences in our neighborhood to those in the query.
+
+First, download amino acid sequences in the query. 
+Not every GenBank record has translated amino acid sequences, but because ours does, we can use them.
+
+```
+cd ~/dib_rotation/plass
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/508/995/GCA_001508995.1_ASM150899v1/GCA_001508995.1_ASM150899v1_protein.faa.gz
+```
+
+There are many, many ways that we could compare the amino acid sequences between the two sequences. 
