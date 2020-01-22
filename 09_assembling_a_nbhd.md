@@ -20,5 +20,60 @@ In the context of metagenomes, this results in many more assembled open reading 
 We will use the [PLASS](https://www.nature.com/articles/s41592-019-0437-4) amino acid assembler to assemble our query neighborhood. 
 Then, we will compare the proteins we assembled with PLASS to those in the original query. 
 
+## Running PLASS and formatting the output
 
+First, start an srun session
+
+```
+srun -p bmh -J plass -t 24:00:00 --mem=8gb -c 1 --pty bash
+```
+
+Then, we can install PLASS into our `dib_rotation` environment.
+
+```
+conda activate dib_rotation
+conda install plass
+```
+
+Then, we can run PLASS.
+
+```
+cd ~/2020_rotation_project
+mkdir -p plass
+cd plass
+ln -s SRR1976948_k31_r1_search_oh0/*.reads.fa.gz .
+plass assemble *.reads.fa.gz query_nbhd_plass
+```
+
+When PLASS finishes, we have to do quite a bit of formatting. 
+
+First, PLASS adds `*` to the end of each amino acid sequence to indicate stop codons.
+Most tools don't recognize this as a valid amino acid encoding, so we have to remove this character.
+We'll download a script and then run it to remove this stop codon.
+
+```
+```
+
+Next, PLASS also outputs identical amino acid sequences when the underlying nucleotide sequences that led to the amino acid sequences are different.
+These are redundant and we don't need them, so we can remove them using a tool called CD-HIT.
+CD-HIT clusters sequences at a user-specified identity, and selects a representative sequence for each cluster.
+In our case, we can cluster at 100% identity and that will reduce the number of amino acide sequences in our final output file.
+
+First, install cd-hit. Make sure you're in your `dib_rotation` environment.
+If you're not, run `conda activate dib_rotation`.
+
+```
+conda install cdhit
+```
+
+Then run CD-HIT
+
+```
+```
+
+PLASS outputs sequences with unique identifiers, but they're not unique before the first space that occurs in the header.
+Many programs truncate amino acid (or any fasta sequence names) at the first space, so we need to make the headers unique before the first space occurs. 
+
+```
+```
 
