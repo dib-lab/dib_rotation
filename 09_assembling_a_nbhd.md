@@ -161,34 +161,19 @@ Once inside of the R session, you should see a new prompt that looks like this: 
 
 Run the following code to analyze the BLAST results.
 Look at the comments to see what each line of code does.
-Read PLASS assemblies into R with Biostrings to get the correct count of the number of amino acids in the assembly.
 
 ```
 library(Biostrings)  # import biostrings functions into current environment
 library(dplyr)       # import dplyr functions into current environment
 
-nbhds <- list.files("explore/blast_plass_bin/plass-hardtrim", ".dup$", full.names = T)
-nbhd_names <- list.files("explore/blast_plass_bin/plass-hardtrim", ".dup$")
-nbhds <- lapply(nbhds, readAAStringSet) # import the plass nbhds
-nbhd_aas <- sapply(nbhds, length) # get the number of AAs in each nbhd
+nbhd <- <- readAAStringSet("query_nbhd_plass.clean.fa") # import the plass nbhd
+nbhd_aas <- length(nbhd)                                # get number of AAs in nbhd
+blast <- read.table("query_nbhd_blast.tab")             # import blast results
 
-blast <- list.files("explore/blast_plass_bin/", ".tab$", full.names = T)
-blast <- lapply(blast, read.table) # import blast
+blast_100 <- filter(blast, V3 == 100)    # retain only AAs that were 100%
+aas_100 <- length(unique(blast_100$V1))  # count num aas 100% contained
 
-tmp <- data.frame()
-df <- data.frame()
-for(i in 1:length(blast)){
-  tmp <- blast[[i]] %>%
-          filter(V3 == 100) # retain only AAs that were 100%
-  tmp_length <- length(unique(tmp$V1))  # count num aas 100% contained
-  # XX prots in PLASS are 100% contained in the bin prots
-  df[i, 'plass_in_bin'] <- tmp_length
-  df[i, 'bin'] <- nbhd_aas[i]
-  df[i, 'name'] <- nbhd_names[i]
-}
-
-
-df$f_plass_100_contained_in_bin <- df$plass_in_bin / df$bin # calc percent for each
-sum(df$f_plass_100_contained_in_bin)/23 # calc average
-
+aas_100/nbhd_aas # calculate the percent of AAs from the nbhd that were in the query
 ```
+
+How many amino acid sequences were added by the neighborhood query and the PLASS assembly?
