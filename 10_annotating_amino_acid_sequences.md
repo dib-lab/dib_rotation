@@ -25,16 +25,117 @@ This allows us to take advantage of KEGG pathway information to determine if any
 
 ## Running kofamscan
 
+First, start an `srun` session.
 
+```
+srun -p bmh -J KO -t 48:00:00 --mem=8gb -c 6 --pty bash
+```
 
+kofamscan is not available as a conda package, but being able to use the KEGG framework is important enough to deal with installing the kofamscan package manually.
 
+We'll create a new environment for kofamscan, and use conda to install all of its dependencies.
 
+```
+conda create -n kofamscan hmmer parallel ruby
+conda activate kofamscan
+```
 
+```
+cd ~/2020_rotation_project
+mkdir -p kofamscan
+cd kofamscan
+ln -s ../plass/query_nbhd_plass.clean.fa .
+ln -s ../blast/GCA_001508995.1_ASM150899v1_protein.faa .
+```
 
+Then, download the databases and executables for the kofamscan program.
 
+```
+wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz		          # download the ko list 
+wget ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz 		    # download the hmm profiles
+wget ftp://ftp.genome.jp/pub/tools/kofamscan/kofamscan.tar.gz	# download kofamscan tool
+wget ftp://ftp.genome.jp/pub/tools/kofamscan/README.md		    # download README
+```
 
+Unzip and untar the relevant files:
 
+```
+gunzip ko_list.gz
+tar xf profiles.tar.gz
+tar xf kofamscan.tar.gz
+```
 
+kofamscan runs using a config file. 
+Using nano or vim, build a config file that looks like this:
+
+```
+# Path to your KO-HMM database
+# A database can be a .hmm file, a .hal file or a directory in which
+# .hmm files are. Omit the extension if it is .hal or .hmm file
+profile: ./profiles
+
+# Path to the KO list file
+ko_list: ko_list
+
+# Path to an executable file of hmmsearch
+# You do not have to set this if it is in your $PATH
+# hmmsearch: /usr/local/bin/hmmsearch
+
+# Path to an executable file of GNU parallel
+# You do not have to set this if it is in your $PATH
+# parallel: /usr/local/bin/parallel
+
+# Number of hmmsearch processes to be run parallelly
+cpu: 6
+```
+
+Now we can run kofamscan!
+We'll run it on our PLASS assembly, and then we will run it on the GenBank assembly.
+
+```
+./exec_annotation -f mapper -o query_nbhd_plass.clean_kofamscan.txt query_nbhd_plass.clean.fa
+```
+
+```
+./exec_annotation -f mapper -o GCA_001508995.1_ASM150899v1_protein_kofamscan.txt GCA_001508995.1_ASM150899v1_protein.faa 
+```
+
+This will output two files that look something like this. 
+The protein name occurs in the left column; this is derived from the amino acid header names.
+If a KEGG ortholog was able to be assigned to the protein, it occurs in the right column.
+
+```
+NORP88_1
+NORP88_2
+NORP88_3	K01869
+NORP88_4
+NORP88_5
+NORP88_6	K07082
+NORP88_7
+NORP88_8	K07448
+NORP88_9
+NORP88_10	K07507
+```
+
+Lastly, use [KEGGDecoder](https://github.com/bjtully/BioData/tree/master/KEGGDecoder) to visualize the differences in KEGG pathways. 
+
+```
+conda install pip
+pip install KEGGDecoder
+```
+
+Combine the kofamscan output files
+
+```
+cat *_kofamscan.txt > kofamscan_results.txt
+```
+
+And run KEGGDecoder
+```
+KEGG-decoder -i kofamscan_results.txt -o kegg_decoder_out --vizoption static
+```
+
+Transfer the output to your local computer using `scp`, and look at the results!
 
 
 > **Side note - using prokka to generate amino acid sequences from nucleotide sequences**    
@@ -49,3 +150,11 @@ This allows us to take advantage of KEGG pathway information to determine if any
 > ```
 > prokka {input} --outdir {outdir} --prefix {bin} --metagenome --force --locustag {bin}
 > ```
+
+## Challenge: metabolishmm
+
+Above, we use kofamscan to assign KEGG orthologs to our amino acid sequences. 
+There are other tools that would allow us look at the metabolic capabilities encoded in amino acid sequences.
+One such tool is metabolishm.
+Try using the metabolishmm [tutorial](https://github.com/elizabethmcd/metabolisHMM/wiki/Subsurface-Aquifer-Tutorial)
+and [wiki documentation](https://github.com/elizabethmcd/metabolisHMM/wiki) to install metabolishmm into its own environment, and to run the tool on our neighborhood and our query.
