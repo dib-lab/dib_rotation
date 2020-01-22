@@ -137,6 +137,14 @@ KEGG-decoder -i kofamscan_results.txt -o kegg_decoder_out --vizoption static
 
 Transfer the output to your local computer using `scp`, and look at the results!
 
+## Challenge: metabolishmm
+
+Above, we use kofamscan to assign KEGG orthologs to our amino acid sequences. 
+There are other tools that would allow us look at the metabolic capabilities encoded in amino acid sequences.
+One such tool is metabolishm.
+Try using the metabolishmm [tutorial](https://github.com/elizabethmcd/metabolisHMM/wiki/Subsurface-Aquifer-Tutorial)
+and [wiki documentation](https://github.com/elizabethmcd/metabolisHMM/wiki) to install metabolishmm into its own environment, and to run the tool on our neighborhood and our query.
+
 
 > **Side note - using prokka to generate amino acid sequences from nucleotide sequences**    
 >
@@ -150,11 +158,3 @@ Transfer the output to your local computer using `scp`, and look at the results!
 > ```
 > prokka {input} --outdir {outdir} --prefix {bin} --metagenome --force --locustag {bin}
 > ```
-
-## Challenge: metabolishmm
-
-Above, we use kofamscan to assign KEGG orthologs to our amino acid sequences. 
-There are other tools that would allow us look at the metabolic capabilities encoded in amino acid sequences.
-One such tool is metabolishm.
-Try using the metabolishmm [tutorial](https://github.com/elizabethmcd/metabolisHMM/wiki/Subsurface-Aquifer-Tutorial)
-and [wiki documentation](https://github.com/elizabethmcd/metabolisHMM/wiki) to install metabolishmm into its own environment, and to run the tool on our neighborhood and our query.
