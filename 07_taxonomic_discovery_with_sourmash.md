@@ -73,6 +73,15 @@ This means that both an assembly and a taxonomy are required for inclusion in th
 Because of the underlying data structures, `sourmash lca gather` is faster, but also requires more memory.
 Farm has plenty of resources, so we will run the faster command.
 
+Download and unzip the database:
+
+```
+curl -L https://osf.io/4f8n3/download -o genbank-k31.lca.json.gz
+gunzip genbank-k31.lca.json.gz
+```
+
+And then run `lca gather`
+
 ```
 sourmash lca gather -o SRR1976948_lca_gather.csv SRR1976948.sig genbank-k31.lca.json
 ```
