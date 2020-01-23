@@ -44,7 +44,7 @@ conda activate kofamscan
 cd ~/2020_rotation_project
 mkdir -p kofamscan
 cd kofamscan
-ln -s ../plass/query_nbhd_plass.clean.fa .
+ln -s ../plass/query_nbhd_plass.cdhit.fa .
 ln -s ../blast/GCA_001508995.1_ASM150899v1_protein.faa .
 ```
 
@@ -93,7 +93,7 @@ Now we can run kofamscan!
 We'll run it on our PLASS assembly, and then we will run it on the GenBank assembly.
 
 ```
-./exec_annotation -f mapper -o query_nbhd_plass.clean_kofamscan.txt query_nbhd_plass.clean.fa
+./exec_annotation -f mapper -o query_nbhd_plass.clean_kofamscan.txt query_nbhd_plass.cdhit.fa
 ```
 
 ```
