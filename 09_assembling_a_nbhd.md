@@ -41,7 +41,7 @@ cd ~/2020_rotation_project
 mkdir -p plass
 cd plass
 ln -s SRR1976948_k31_r1_search_oh0/GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.fa.gz .
-plass assemble GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.fa.gz query_nbhd_plass tmp
+plass assemble GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.fa.gz query_nbhd_plass.fa tmp
 ```
 
 When PLASS finishes, we have to do quite a bit of formatting. 
@@ -52,7 +52,7 @@ We'll download a script and then run it to remove this stop codon.
 
 ```
 wget https://raw.githubusercontent.com/spacegraphcats/2018-paper-spacegraphcats/master/pipeline-base/scripts/remove-stop-plass.py
-remove-stop-plass.py query_nbhd_plass/
+python remove-stop-plass.py query_nbhd_plass.fa
 ```
 
 Next, PLASS also outputs identical amino acid sequences when the underlying nucleotide sequences that led to the amino acid sequences are different.
@@ -64,21 +64,13 @@ First, install CD-HIT. Make sure you're in your `dib_rotation` environment.
 If you're not, run `conda activate dib_rotation`.
 
 ```
-conda install cdhit
+conda install cd-hit
 ```
 
 Then run CD-HIT
 
 ```
 cd-hit -c 1 -i  query_nbhd_plass.fa.nostop.fa -o  query_nbhd_plass.cdhit.fa
-```
-
-PLASS outputs sequences with unique identifiers, but they're not unique before the first space that occurs in the header.
-Many programs truncate amino acid (or any fasta sequence names) at the first space, so we need to make the headers unique before the first space occurs. 
-
-```
-wget https://raw.githubusercontent.com/dib-lab/dib_rotation/master/scripts/format_plass_headers.py
-format_plass_headers.py query_nbhd_plass.cdhit.fa query_nbhd_plass.clean.fa
 ```
 
 ## Comparing amino acid sequences in our neighborhood to those in the query
@@ -105,7 +97,7 @@ We'll use BLAST to compare all of the protein sequences in our PLASS assembly to
 We just downloaded the GenBank assembly amino acid sequences to our `blast` folder, let's link in our PLASS amino acid assembly.
 
 ```
-ln -s ../plass/query_nbhd_plass.clean.fa .
+ln -s ../plass/query_nbhd_plass.cdhit.fa .
 ```
 
 Next, we need to install BLAST into our environment.
@@ -129,7 +121,7 @@ This will allow us to BLAST two sequences together without needing to build our 
 We will also use the flag `-outfmt 6` which will give us our results in tab-delineated format.
 
 ```
-blastp -query query_nbhd_plass.clean.fa -subject GCA_001508995.1_ASM150899v1_protein.faa -outfmt 6 -out query_nbhd_blast.tab
+blastp -query query_nbhd_plass.cdhit.fa -subject GCA_001508995.1_ASM150899v1_protein.faa -outfmt 6 -out query_nbhd_blast.tab
 ```
 
 Now that we have our BLAST results, we can analyze them in R.
@@ -144,7 +136,7 @@ and `Biostrings` makes reading amino acid sequences simple.
 
 ```
 conda deactivate
-conda create -n renv  r-dplyr=0.8.3  bioconductor-biostrings=2.54.0 
+conda create -n renv r-dplyr=0.8.3 bioconductor-biostrings=2.54.0 
 ```
 
 Once installed, activate the new environment
