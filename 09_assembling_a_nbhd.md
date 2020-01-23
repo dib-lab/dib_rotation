@@ -1,4 +1,4 @@
-In the [previous lesson](08_bin_completion_with_spacegraphcats.md), we observed that querying our metagenome with a *de novo* assembled genome returned a neighborhood XX% larger than the query.
+In the [previous lesson](08_bin_completion_with_spacegraphcats.md), we observed that querying our metagenome with a *de novo* assembled genome returned a neighborhood that was 55% similar to the query.
 Now we will assemble our query neighborhood and determine whether it contains additional amino acid sequences that were not in our query.
 
 ## But wasn't assembly a problem?
