@@ -160,7 +160,7 @@ We're going to create a new environment for spacegraphcats, and follow the insta
 
 First, start an `srun` session
 ```
-srun -p bmh -J sgc -t 48:00:00 --mem=40gb -c 2 --pty bash
+srun -p bmh -J sgc -t 48:00:00 --mem=70gb -c 2 --pty bash
 ```
 
 Make sure you start from the base environment.
@@ -211,7 +211,8 @@ search:
 searchquick: GCA_001508995.1_ASM150899v1_genomic.fna.gz
 ```
 
-Use a text editor such as nano or vim to generate this file, and call it `conf1.yml`
+Use a text editor such as nano or vim to generate this file, and call it `conf1.yml`.
+(Here's a tutorial on using [nano](https://datacarpentry.org/shell-genomics/05-writing-scripts/).)
 
 Now we're ready to run spacegraphcats!
 
