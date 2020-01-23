@@ -238,7 +238,7 @@ sourmash compute -k 21,31,51 --scaled 2000 -o GCA_001508995.1_ASM150899v1_genomi
 ```
 
 ```
-sourmash compare -k 31 --csv comp1 *sig SRR1976948_k31_r1_search_oh0/*sig
+sourmash compare -k 31 --csv comp1.csv *sig SRR1976948_k31_r1_search_oh0/*sig
 ```
 
 How similar are these two signatures? 
