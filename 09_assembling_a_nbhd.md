@@ -171,3 +171,10 @@ aas_100/query_aas # calculate the percent of query that was in the nbhd
 ```
 
 How many amino acid sequences were added by the neighborhood query and the PLASS assembly?
+
+To quit R, type
+```
+quit()
+```
+
+Type `n` when asked `Save workspace image?`
