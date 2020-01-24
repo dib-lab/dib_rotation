@@ -158,7 +158,7 @@ Look at the comments to see what each line of code does.
 library(Biostrings)  # import biostrings functions into current environment
 library(dplyr)       # import dplyr functions into current environment
 
-nbhd <- <- readAAStringSet("query_nbhd_plass.clean.fa") # import the plass nbhd
+nbhd <- <- readAAStringSet("query_nbhd_plass.cdhit.fa") # import the plass nbhd
 nbhd_aas <- length(nbhd)                                # get number of AAs in nbhd
 blast <- read.table("query_nbhd_blast.tab")             # import blast results
 
