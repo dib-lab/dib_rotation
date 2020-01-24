@@ -1,4 +1,4 @@
-In the [previous lesson](09_assembling_a_nbhd.md), we saw that our neighborhood query + PLASS assembly approach increased the number of amino acid sequences over those in our query by XX%.
+In the [previous lesson](09_assembling_a_nbhd.md), we saw that our neighborhood query + PLASS assembly approach increased the number of amino acid sequences over those in our query by 26%.
 What do these amino acid sequences encode? 
 Are they strain variants (e.g. a few amino acids different) from those that were already in the query, or do they add new functionality?
 In this lesson, we will annotate the amino acid sequences in our PLASS assembly and in the GenBank assembly, and then compare the encoded functions.
