@@ -1,5 +1,5 @@
 In the [previous lesson](07_taxonomic_discovery_with_sourmash.md), we used sourmash to determine the approximate taxonomic composition of our metagenome sample. 
-Sourmash performs quick exact matching between the k-mers in your sample and k-mers in a databases -- this means that a sequence must have been previously sequenced and be in a database in order for us to be able to label it in our sample. 
+Sourmash performs quick exact matching between the k-mers in your sample and k-mers in databases -- this means that a sequence must have been previously sequenced and be in a database in order for us to be able to label it in our sample. 
 We often cannot label a lot of the sequences in our sample, especially if that sample comes from a novel environment that has not be sequenced in the past. 
 We saw this in the previous lesson, where we were only able to classify ~10% of the reads in our sample.
 
