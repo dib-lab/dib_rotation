@@ -141,8 +141,8 @@ Once `khmer` is installed, we can use it for k-mer trimming.
 Let's get our files and directories set up 
 ```
 cd ~/2020_rotation_project
-mkdir -p abund_trim
-cd abund_trim
+mkdir -p abundtrim
+cd abundtrim
 ```
 
 And link in our files from adapter trimming.
