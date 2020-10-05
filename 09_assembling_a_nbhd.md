@@ -40,8 +40,7 @@ Now we can run PLASS!
 cd ~/2020_rotation_project
 mkdir -p plass
 cd plass
-ln -s SRR1976948_k31_r1_search_oh0/GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.fa.gz .
-plass assemble GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.fa.gz query_nbhd_plass.fa tmp
+plass assemble ../sgc/SRR1976948_k31_r1_search_oh0/GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.fa.gz query_nbhd_plass.fa tmp
 ```
 
 When PLASS finishes, we have to do quite a bit of formatting. 
