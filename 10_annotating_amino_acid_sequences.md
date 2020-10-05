@@ -53,8 +53,6 @@ Then, download the databases and executables for the kofamscan program.
 ```
 wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz		          # download the ko list 
 wget ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz 		    # download the hmm profiles
-wget ftp://ftp.genome.jp/pub/tools/kofamscan/kofamscan.tar.gz	# download kofamscan tool
-wget ftp://ftp.genome.jp/pub/tools/kofamscan/README.md		    # download README
 ```
 
 Unzip and untar the relevant files:
@@ -62,11 +60,10 @@ Unzip and untar the relevant files:
 ```
 gunzip ko_list.gz
 tar xf profiles.tar.gz
-tar xf kofamscan.tar.gz
 ```
 
 kofamscan runs using a config file. 
-Using nano or vim, build a config file that looks like this:
+Using nano or vim (e.g. `nano config.yml`, build a config file that looks like this:
 
 ```
 # Path to your KO-HMM database
@@ -93,11 +90,11 @@ Now we can run kofamscan!
 We'll run it on our PLASS assembly, and then we will run it on the GenBank assembly.
 
 ```
-./exec_annotation -f mapper -o query_nbhd_plass.clean_kofamscan.txt query_nbhd_plass.cdhit.fa
+exec_annotation -f mapper -o query_nbhd_plass.clean_kofamscan.txt query_nbhd_plass.cdhit.fa
 ```
 
 ```
-./exec_annotation -f mapper -o GCA_001508995.1_ASM150899v1_protein_kofamscan.txt GCA_001508995.1_ASM150899v1_protein.faa 
+exec_annotation -f mapper -o GCA_001508995.1_ASM150899v1_protein_kofamscan.txt GCA_001508995.1_ASM150899v1_protein.faa 
 ```
 
 This will output two files that look something like this. 
