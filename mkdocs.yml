@@ -1,0 +1,47 @@
+site_name: dib-lab NSURP project
+site_url: http://dib-lab.github.io/dib_rotation/
+repo_name: dib_rotation
+repo_url: https://github.com/dib-lab/dib_rotation
+edit_uri: ""
+
+copyright: 'Copyright &copy; 2020 <a href="http://ivory.idyll.org/lab/">Lab for Data Intensive Biology</a> at UC Davis'
+
+# change directory names here
+docs_dir: doc
+site_dir: site
+
+theme:
+  name: material
+
+  # pretty colors! see https://squidfunk.github.io/mkdocs-material/getting-started/#primary-colors
+  palette:
+    primary: 'deep orange'
+    accent: 'black'
+  
+  # fun logos! see https://material.io/icons/
+  icon:
+    logo: material/school
+
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  
+# optionally give a title for each page or section
+nav:
+  - 'Home': '00_getting_started.md'
+  - "Setup":
+    - "Setting up Farm": "01_farm_account.md"
+    - "Install Conda": "02_conda.md"
+  - "Background Reading": "03_background_reading.md"
+  - "Keeping a Lab Notebook": "04_documentation.md"
+  - "Starting a Work Session": "04b_starting_a_work_session.md"
+  - "Metagenomics Project":
+    - "Find and download the data": "05_starting_with_data.md"
+    - "Quality Control": "06_trimming.md"
+    - "Taxonomic Discovery with Sourmash": "07_taxonomic_discovery_with_sourmash.md"
+    - "Bin Completion with Spacegraphcats": "08_bin_completion_with_spacegraphcats.md"
+    - "Assembling a Nbhd": "09_assembling_a_nbhd.md"
+    - "Annotating amino acid sequences": "10_annotating_amino_acid_sequences.md"
+  - "Advanced Modules":
+    - "Automation, Workflows, and Repeatability": "11_workflows_and_repeatability.md"
+    - "Version Control with Git and GitHub":  "12_angus_github.md"
