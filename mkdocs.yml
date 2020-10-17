@@ -37,7 +37,7 @@ nav:
   - "Starting a Work Session": "04b_starting_a_work_session.md"
   - "Metagenomics Project":
     - "Find and download the data": "05_starting_with_data.md"
-    - "Quality Control": "06_trimming.md"
+    - "Quality Control": "06_quality_control.md"
     - "Taxonomic Discovery with Sourmash": "07_taxonomic_discovery_with_sourmash.md"
     - "Bin Completion with Spacegraphcats": "08_bin_completion_with_spacegraphcats.md"
     - "Assembling a Nbhd": "09_assembling_a_nbhd.md"

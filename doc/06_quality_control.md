@@ -68,7 +68,7 @@ Fastp also creates its own FastQC-style `html` reports for the files that we can
 ### Run fastp
 
 **Reminder, make sure you've followed the [Starting a Work Session](04b_starting_a_work_session.md) steps to get your Farm session set up.**
-**You should be within your `dib-rotation` conda environment.**
+**You should be within your `dib_rotation` conda environment.**
 
 
 Install fastp:

@@ -15,10 +15,10 @@ Let's put some of our commands from the quality trimming module into one script.
 
 We'll call it `run_qc.sh`. The `sh` at the end of the tells you that this is a bash script.
 
-First, cd into the `2020-NSURP` directory
 
+-First, cd into the `2020_rotation_project` directory
 ```
-cd ~/2020-NSURP
+cd ~/2020_rotation_project
 ```
 
 Now, use `nano` to create and edit a file called `run-qc.sh` 
@@ -26,11 +26,11 @@ Now, use `nano` to create and edit a file called `run-qc.sh`
 `nano run-qc.sh` will open the file. Now add the following text:
 
 ```
-cd ~/2020-NSURP
+cd ~/2020_rotation_project
 mkdir -p quality
 cd quality
 
-ln -s ~/2020-NSURP/raw_data/*.fastq.gz ./
+ln -s ~/2020_rotation_project/raw_data/*.fastq.gz ./
 
 printf "I see $(ls -1 *.fastq.gz | wc -l) files here.\n"
 
@@ -48,7 +48,7 @@ Exit `nano` and try it out!
 
 Run:
 ```
-cd ~/2020-NSURP
+cd ~/2020_rotation_project
 bash run-qc.sh
 ```
 
@@ -84,7 +84,7 @@ Put
 at the top of the file, and then run
 
 ```
-chmod +x ~/2020-NSURP/run-qc.sh
+chmod +x ~/2020_rotation_project/run-qc.sh
 ```
 
 at the command line.
@@ -134,22 +134,22 @@ Open a file called `Snakefile` using `nano`:
 nano Snakefile
 ```
 
-Here is the command we would need for a single sample, `CSM7KOJE`
+Here is the command we would need for a single sample, `SRR1976948`
 ```
 rule all:
     input:
-        "quality/CSM7KOJE_1.trim.fastq.gz",
-        "quality/CSM7KOJE_2.trim.fastq.gz"
+        "quality/SRR1976948_1.trim.fastq.gz",
+        "quality/SRR1976948_2.trim.fastq.gz"
 
 rule trim_reads:
     input:
-        in1="raw_data/CSM7KOJE_R1.fastq.gz",
-        in2="raw_data/CSM7KOJE_R2.fastq.gz",
+        in1="raw_data/SRR1976948_1.fastq.gz",
+        in2="raw_data/SRR1976948_2.fastq.gz",
     output:
-        out1="quality/CSM7KOJE_1.trim.fastq.gz",
-        out2="quality/CSM7KOJE_2.trim.fastq.gz",
-        json="quality/CSM7KOJE.fastp.json",
-        html="quality/CSM7KOJE.fastp.html"
+        out1="quality/SRR1976948_1.trim.fastq.gz",
+        out2="quality/SRR1976948_2.trim.fastq.gz",
+        json="quality/SRR1976948.fastp.json",
+        html="quality/SRR1976948.fastp.html"
     shell:
         """
         fastp --in1 {input.in1}  --in2 {input.in2}  \
@@ -162,7 +162,7 @@ rule trim_reads:
 
 We can run it like this:
 ```
-cd ~/2020-NSURP
+
 snakemake -n
 ```
 > the `-n` tells snakemake to run a "dry run" - that is, just check that the input files exist and all files specified in rule `all` can be created from the rules provided within the Snakefile).
@@ -174,7 +174,7 @@ That's because the trimmed files already exist!
 Let's fix that:
 
 ```
-rm quality/CSM7KOJE*.trim.fastq.gz
+rm quality/SRR1976948*.trim.fastq.gz
 ```
 
 and now, when you run `snakemake`, you should see the fastp being run. Yay w00t! Then if you run `snakemake` again, you will see that it doesn't need to do anything - all the files are "up to date".
@@ -182,10 +182,10 @@ and now, when you run `snakemake`, you should see the fastp being run. Yay w00t!
 
 ### Running all files at once
 
-Snakemake wouldn't be very useful if it could only trim one file at a time, so let's modify the Snakefile to run more files at once:
+Snakemake wouldn't be very useful if it could only trim one file at a time, so let's modify the Snakefile so it _could_ run more files at once:
 
 ```
-SAMPLES = ["CSM7KOJE", "CSM7KOJ0"]
+SAMPLES = ["SRR1976948"]
 rule all:
     input:
         expand("quality/{sample}_1.trim.fastq.gz", sample=SAMPLES)
@@ -232,13 +232,13 @@ rm quality/*.trim.fastq.gz
 We've been using a conda environment throughout our modules. 
 We can export the installed package names to a file that we can use to re-install all packages in a single step (like on a different computer). 
 ```
-conda env export -n nsurp-env -f ~/2020-NSURP/nsurp-environment.yaml
+conda env export -n dib_rotation -f ~/2020_rotation_project/dib_rotation_environment.yaml
 ```
 
 We can use this environment in our snakemake rule as well!
 
 ```
-SAMPLES = ["CSM7KOJE", "CSM7KOJ0"]
+SAMPLES = ["SRR1976948"]
 
 rule all:
     input:
@@ -254,7 +254,7 @@ rule trim_reads:
         out2="quality/{sample}_2.trim.fastq.gz",
         json="quality/{sample}.fastp.json",
         html="quality/{sample}.fastp.html"
-    conda: "nsurp-environment.yaml"
+    conda: "dib_rotation_environment.yaml"
     shell:
         """
         fastp --in1 {input.in1}  --in2 {input.in2}  \
@@ -265,7 +265,7 @@ rule trim_reads:
         """
 ```
 
-Here, we just have a single environment, so it was pretty easy to just run the Snakefile while within our `nsurp-env` environment. Using conda environment with snakemake becomes more useful as you use more tools, because it helps to keep different tools (which likely have different software dependencies) in separate conda environments.
+Here, we just have a single environment, so it was pretty easy to just run the Snakefile while within our `dib_rotation` environment. Using conda environment with snakemake becomes more useful as you use more tools, because it helps to keep different tools (which likely have different software dependencies) in separate conda environments.
 
 Run snakemake with `--use-conda` to have snakemake use the conda environment for this step.
 ```
