@@ -1,10 +1,10 @@
 Quality Control the Data
 ===
 
-If you're starting a new work session on FARM, be sure to follow the instructions [here](05.starting-a-work-session.md).
+If you're starting a new work session on FARM, be sure to follow the instructions [here](04b_starting_a_work_session.md).
 
 
-After [downloading sequencing data](06.download-assess-ibd-data.md), the next step in many pipelines is to perform quality control trimming on the reads.
+After [downloading sequencing data](05_starting_with_data.md), the next step in many pipelines is to perform quality control trimming on the reads.
 However, deciding when and how to trim data is pipeline dependent.
 Below, we define a few types of quality control and explore a use cases and how trimming recommendations may change with different applications.
 Although this project focuses on metagenomic sequencing, we include other applications in this discussion.
@@ -53,7 +53,7 @@ We include some of these studies below.
 
 We will use [fastp](https://academic.oup.com/bioinformatics/article/34/17/i884/5093234) to do quality trimming of our reads.
 
-In the [Download and Visual Assessment Module](06.download-assess-ibd-data.md), we saw using FastQC that the Illumina Universal Adapter was present in our samples.
+In the [Downloading Data Module](05_starting_with_data.md), we saw using FastQC that the Illumina Universal Adapter was present in our samples.
 
 ![](_static/adapter_content_R1.png)
 
@@ -67,8 +67,8 @@ Fastp also creates its own FastQC-style `html` reports for the files that we can
 
 ### Run fastp
 
-**Reminder, make sure you've followed the [Starting a Work Session](05.starting-a-work-session.md) steps to get your Farm session set up.**
-**You should be within your `nsurp-env` conda environment.**
+**Reminder, make sure you've followed the [Starting a Work Session](04b_starting_a_work_session.md) steps to get your Farm session set up.**
+**You should be within your `dib-rotation` conda environment.**
 
 
 Install fastp:
@@ -81,7 +81,7 @@ We can now trim our data!
 Let's set up our directory structure:
 
 ```
-cd ~/2020-NSURP
+cd ~/2020_rotation_project
 mkdir -p trim
 cd trim
 ```
@@ -89,8 +89,8 @@ cd trim
 Run fastp on the `SRR1976948` sample with the following command:
 
 ```
-fastp --in1 ~/2020-NSURP/raw_data/ SRR1976948_1.fastq.gz \
-  --in2 ~/2020-NSURP/raw_data/ SRR1976948_2.fastq.gz \
+fastp --in1 ~/2020_rotation_project/raw_data/ SRR1976948_1.fastq.gz \
+  --in2 ~/2020_rotation_project/raw_data/ SRR1976948_2.fastq.gz \
   --out1 SRR1976948_1.trim.fastq.gz \
   --out2 SRR1976948_2.trim.fastq.gz \
   --detect_adapter_for_pe \
@@ -115,10 +115,10 @@ Recall from our FastQC lesson that a quality score of 10 indicates a 1 in 10 cha
 A score of 20 is a 1 in 100 chance that the base is inaccurate. 30 is 1 in 1,000. And 40 in 1 in 10,000. 
 By using a score of 4, we are more likely to keep data that has a high probability of being accurate. 
 
-As done in [downloading sequencing data](06.download-assess-ibd-data.md), you can use `scp` to copy the html report to your computer:
+As done in [downloading sequencing data](05_starting_with_data.md), you can use `scp` to copy the html report to your computer:
 
 ```
-scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020-NSURP/trim/*.html ./
+scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/trim/*.html ./
 ```
 
 If you're on a mac using `zsh`, you may need to replace the `scp` with `noglob scp` in the command above.
@@ -192,7 +192,7 @@ conda install -y khmer
 Once `khmer` is installed, we can use it for k-mer trimming. 
 Let's get our files and directories set up:
 ```
-cd ~/2020-NSURP
+cd ~/2020_rotation_project
 mkdir -p kmer-trim
 cd kmer-trim
 ```
@@ -205,11 +205,11 @@ Note that these commands are connected by the pipe (`|`) character.
 This character means that the first half of the command (before the `|`) is executed first, and the output is passed ("piped") to the second half of the command (after the `|`).
 
 ```
-interleave-reads.py ~/2020-NSURP/trim/SRR1976948_1.trim.fastq.gz ~/2020-NSURP/trim/SRR1976948_2.trim.fastq.gz | \
+interleave-reads.py ~/2020_rotation_project/trim/SRR1976948_1.trim.fastq.gz ~/2020_rotation_project/trim/SRR1976948_2.trim.fastq.gz | \
         trim-low-abund.py --gzip -C 3 -Z 18 -M 20e9 -V - -o SRR1976948.kmertrim.fq.gz
 ```
-> Note: Here, we are referencing the trimmed files using an absolute path: `~/2020-NSURP/trim/`.
-> That is, to access these files, we go to our home directory (`~`), then descend into the `2020-NSURP` folder, then descend again into the `trim` folder.
+> Note: Here, we are referencing the trimmed files using an absolute path: `~/2020_rotation_project/trim/`.
+> That is, to access these files, we go to our home directory (`~`), then descend into the `2020_rotation_project` folder, then descend again into the `trim` folder.
 
 
 ### Assess changes in kmer abundance
