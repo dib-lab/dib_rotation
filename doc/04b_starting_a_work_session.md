@@ -19,12 +19,12 @@ If we run any computing on these login nodes, logging into and navigating farm w
 
 We can use the following command to get access to a computer that will fit our needs:
 ```
-srun -p bmm -J dib-rotation -t 5:00:00 --mem=10G --pty bash
+srun -p bmm -J rotation -t 5:00:00 --mem=10G --pty bash
 ```
 
 > -  `srun` uses the computer's job scheduler `SLURM` to allocate you a computer
 > - `-p` specifies the job queue we want to use, and is specific to our `farm` accounts.
-> - `-J dib-rotation` is the "job name" assigned to this session. It can be modified to give your session a more descriptive name, e.g. `-J download-data`
+> - `-J rotation` is the "job name" assigned to this session. It can be modified to give your session a more descriptive name, e.g. `-J download-data`
 > - `-t` denotes that we want the computer for that amount of time (in this case, 3 hours).
 > - `--mem` specifies the amount of memory we'd like the computer to have. Here we've asked for 10 Gigabytes (10G). 
 > - `--pty bash` specified that we want the linux shell to be the `bash` shell, which is the standard shell we've been working wiht so far
@@ -37,7 +37,7 @@ Note that your home directory (the files you see) will be the same for both the 
 Once you're in an `srun` session, activate your project environment to get access to the software you've installed
 
 ```
-conda activate dib-rotation
+conda activate dib_rotation
 ```
 
 ## Leaving your tmux session
