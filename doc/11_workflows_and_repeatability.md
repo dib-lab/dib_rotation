@@ -34,10 +34,10 @@ ln -s ~/2020_rotation_project/raw_data/*.fastq.gz ./
 
 printf "I see $(ls -1 *.fastq.gz | wc -l) files here.\n"
 
-for infile in *_R1.fastq.gz
+for infile in *_1.fastq.gz
   do
-    name=$(basename ${infile} _R1.fastq.gz)
-    fastp --in1 ${name}_R1.fastq.gz  --in2 ${name}_R2.fastq.gz   --out1 ${name}_1.trim.fastq.gz --out2 ${name}_2.trim.fastq.gz  --detect_adapter_for_pe \
+    name=$(basename ${infile} _1.fastq.gz)
+    fastp --in1 ${name}_1.fastq.gz  --in2 ${name}_2.fastq.gz   --out1 ${name}_1.trim.fastq.gz --out2 ${name}_2.trim.fastq.gz  --detect_adapter_for_pe \
       --qualified_quality_phred 4  --length_required 31 --correction --json ${name}.trim.json --html ${name}.trim.html
   done
 
@@ -247,8 +247,8 @@ rule all:
 
 rule trim_reads:
     input:
-        in1="raw_data/{sample}_R1.fastq.gz",
-        in2="raw_data/{sample}_R2.fastq.gz",
+        in1="raw_data/{sample}_1.fastq.gz",
+        in2="raw_data/{sample}_2.fastq.gz",
     output:
         out1="quality/{sample}_1.trim.fastq.gz",
         out2="quality/{sample}_2.trim.fastq.gz",
