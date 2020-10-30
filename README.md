@@ -1,5 +1,8 @@
 # DIB Lab Metagenomics Rotation Project
 
+
+Welcome to the project home for our DIB-lab rotation materials!  The [training website](dib-lab.github.io/dib_rotation/) contains a much prettier (rendered) version of these materials - check it out!
+
 The material in this repository covers a metagenomics workflow.
 It incorporates bioinformatics skills like unix, documenting workflows, and using a remote computer. 
 It covers the use of tools like sourmash and spacegraphcats. 
