@@ -89,8 +89,8 @@ cd trim
 Run fastp on the `SRR1976948` sample with the following command:
 
 ```
-fastp --in1 ~/2020_rotation_project/raw_data/ SRR1976948_1.fastq.gz \
-  --in2 ~/2020_rotation_project/raw_data/ SRR1976948_2.fastq.gz \
+fastp --in1 ~/2020_rotation_project/raw_data/SRR1976948_1.fastq.gz \
+  --in2 ~/2020_rotation_project/raw_data/SRR1976948_2.fastq.gz \
   --out1 SRR1976948_1.trim.fastq.gz \
   --out2 SRR1976948_2.trim.fastq.gz \
   --detect_adapter_for_pe \
