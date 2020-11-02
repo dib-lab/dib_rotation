@@ -180,16 +180,34 @@ actually a compressed set of multiple output files. We'll be working
 with these output files soon. The `.html` file is a stable webpage
 displaying the summary report for each of our samples.
 
-## Transfering data from Farm to your computer
+## Transferring data from Farm to your computer
 
 To transfer a file from a remote server to our own machines, we will use `scp`. 
 To learn more about `scp`, see the bottom of [this tutorial](https://datacarpentry.org/shell-genomics/05-writing-scripts/).
 
-Now we can transfer our HTML files to our local computer using `scp`.
+
+We've currently been running commands on a terminal open on `farm`. 
+In order to transfer to our own computer, we want a terminal open on our local computer. 
+There are two ways to do this: open a second terminal tab/window, or close tmux and exit farm. Let's make a new window.
+
+Once you've opened a second terminal window, you need to make sure you know what file system each window is pointing to.
+If you're on farm (the original window), the prompt should say `(dib_rotation) USERNAME@<SRUN NODE>`. Your new window should
+just have `USERNAME@<YOUR COMPUTER NAME>`. There will be no `(dib_rotation)` unless you've created and activated that conda
+environment on your local computer as well.
+
+Now, from the terminal open to your local computer, copy over the fastqc HTML files using `scp`, a "secure copy" program.
 
 ```
 scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/raw_data/*.html .
 ```
+
+>   - -P 2022 tells scp to use the 2022 port on farm, which is our data transfer port
+>   - replace /path/to/key/file with the path to your ssh keygen file, created during setup
+>   - both `cp` and `scp` commands use the format: `cp <FILE_TO_TRANSFER> <DESTINATION>`. 
+
+This command will copy the files down to the directory that you're sitting in on your home computer. If you're on a windows machine,
+you may need to copy it from your linux partition over to your windows partition (perhaps most easily accessible in a downloads folder
+or your desktop).
 
 Once the file is on your local computer, double click on it and it will open in your browser. 
 You can now explore the FastQC output.
@@ -198,7 +216,7 @@ You can now explore the FastQC output.
 
 We've now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we haven't talked about! 
 Below we have provided a brief overview of interpretations for each of these plots. 
-For more information, please see the FastQC documentation [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) 
+For more information, please see the FastQC documentation [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
 
 + [**Per tile sequence quality**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/12%20Per%20Tile%20Sequence%20Quality.html): the machines that perform sequencing are divided into tiles. This plot displays patterns in base quality along these tiles. Consistently low scores are often found around the edges, but hot spots can also occur in the middle if an air bubble was introduced at some point during the run. 
 + [**Per sequence quality scores**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/3%20Per%20Sequence%20Quality%20Scores.html): a density plot of quality for all reads at all positions. This plot shows what quality scores are most common. 
