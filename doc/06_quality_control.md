@@ -115,7 +115,8 @@ Recall from our FastQC lesson that a quality score of 10 indicates a 1 in 10 cha
 A score of 20 is a 1 in 100 chance that the base is inaccurate. 30 is 1 in 1,000. And 40 in 1 in 10,000. 
 By using a score of 4, we are more likely to keep data that has a high probability of being accurate. 
 
-As done in [downloading sequencing data](05_starting_with_data.md), you can use `scp` to copy the html report to your computer:
+As done in [downloading sequencing data](05_starting_with_data.md), you can use `scp` to copy the html report to your computer.
+Make sure you're running this command _from your own computer_, not from `farm`.
 
 ```
 scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/trim/*.html ./
@@ -175,13 +176,13 @@ Since we changed computers, our conda environment was automatically deactivated.
 Activate your project environment again:
 
 ```
-conda activate nsurp-env
+conda activate dib_rotation
 ```
 
 ### Install khmer
 
 We need to install the software we will use to perform k-mer trimming, `khmer`.
-Make sure you activate the conda environment you are using for this project with `conda activate env_name`.
+Make sure you've activated the conda environment you are using for this project before running this command!
 
 ```
 conda install -y khmer
@@ -226,25 +227,22 @@ unique-kmers.py SRR1976948.kmertrim.fq.gz
 > That is, to access the `SRR1976948_*.trim.fastq.gz` files, we go up one directory (`../`), then down into `trim`.
 
 
-The raw adapter-trimmed inputs have an estimated 164426731 unique 32-mers.
+The raw adapter-trimmed inputs have an estimated 442441435 unique 32-mers.
 ```
-Estimated number of unique 32-mers in ../trim/SRR1976948_1.trim.fastq.gz: 83127191
-Estimated number of unique 32-mers in ../trim/SRR1976948_2.trim.fastq.gz: 80110484
-Total estimated number of unique 32-mers: 98077936
-```
-
-The k-mer trimmed file (kmer output) has an estimated 163890994 unique 32-mers.
-```
-Estimated number of unique 32-mers in SRR1976948.kmertrim.fq.gz: 163890994
-Total estimated number of unique 32-mers: 163890994
+Estimated number of unique 32-mers in ../trim/SRR1976948_1.trim.fastq.gz: 271670733
+Estimated number of unique 32-mers in ../trim/SRR1976948_2.trim.fastq.gz: 370246495
+Total estimated number of unique 32-mers: 442441435
 ```
 
-Note that the second number is smaller than the first, with a little over 500,000 low-abundance k-mers having been removed as likely errors.
-These are pretty small sample datasets that are already relatively clean - often the difference in unique k-mers is MUCH larger!
+The k-mer trimmed file (kmer output) has an estimated  unique 32-mers.
+```
+Estimated number of unique 32-mers in SRR1976948.kmertrim.fq.gz: 329577970
+Total estimated number of unique 32-mers: 329577970
+```
 
-### Challenge: quality control
+Note that the second number is smaller than the first, with over 112m k-mers having been removed.
 
-Make sure you do `fastp` and `khmer` trimming on each of the 6 datasets.
-Keep track of the commands you use in a [HackMD](hackmd.io) lab notebook.
+### Lab notebook considerations
+
+Make sure you keep track of all commands you run for this project in a [HackMD](hackmd.io) lab notebook.
 Use backticks to create code blocks and be sure to write notes describing the purpose of each step and any problems you encountered.
-There's no need to count unique k-mers for every dataset, but feel free if you'd like to look at the differences :).
