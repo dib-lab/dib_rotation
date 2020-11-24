@@ -171,6 +171,7 @@ cd ~
 git clone https://github.com/spacegraphcats/spacegraphcats/
 conda env create -f spacegraphcats/environment.yml -n sgc
 conda activate sgc
+pip install --pre spacegraphcats
 ```
 
 Next, we need to decide what query we'd like to use. 
