@@ -217,7 +217,7 @@ Use a text editor such as nano or vim to generate this file, and call it `conf1.
 Now we're ready to run spacegraphcats!
 
 ```
-python -m spacegraphcats conf1.yml extract_contigs extract_reads --nolock 
+python -m spacegraphcats run conf1.yml extract_contigs extract_reads --nolock 
 ```
 
 This will take a while to run. 
