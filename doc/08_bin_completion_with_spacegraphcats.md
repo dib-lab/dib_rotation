@@ -171,6 +171,7 @@ cd ~
 git clone https://github.com/spacegraphcats/spacegraphcats/
 conda env create -f spacegraphcats/environment.yml -n sgc
 conda activate sgc
+pip install --pre spacegraphcats
 ```
 
 Next, we need to decide what query we'd like to use. 
@@ -217,7 +218,7 @@ Use a text editor such as nano or vim to generate this file, and call it `conf1.
 Now we're ready to run spacegraphcats!
 
 ```
-python -m spacegraphcats conf1.yml extract_contigs extract_reads --nolock 
+python -m spacegraphcats run conf1.yml extract_contigs extract_reads --nolock 
 ```
 
 This will take a while to run. 
