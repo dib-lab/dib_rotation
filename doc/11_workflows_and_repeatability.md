@@ -265,7 +265,8 @@ rule trim_reads:
         """
 ```
 
-Here, we just have a single environment, so it was pretty easy to just run the Snakefile while within our `dib_rotation` environment. Using conda environment with snakemake becomes more useful as you use more tools, because it helps to keep different tools (which likely have different software dependencies) in separate conda environments.
+Here, we just have a single environment, so it was pretty easy to just run the Snakefile while within our `dib_rotation` environment.
+Using conda environment with snakemake becomes more useful as you use more tools, because it helps to keep different tools (which likely have different software dependencies) in separate conda environments.
 
 Run snakemake with `--use-conda` to have snakemake use the conda environment for this step.
 ```
@@ -280,3 +281,10 @@ These features ensure that the steps for data analysis are minimally documented 
 When paired with proper software management, fully-contained workows are scalable, robust to software updates, and executable across platforms, meaning they will likely still execute the same set of commands with little investment by the user after weeks, months, or years.
 
 Check out our [workflows preprint](https://www.biorxiv.org/content/10.1101/2020.06.30.178673v1) for a guide.
+
+## Bonus exercise
+
+The above exercise walks you through how to write and run a snakefile for quality trimming. 
+For additional practice using snakemake, snakemake the entire rotation project (e.g., running sourmash and spacegraphcats). 
+As a super extra bonus, you can even snakemake the data download step. 
+Note you will need two conda environment yaml file, one for the spacegraphcats rule and one for the rest of the rules. 

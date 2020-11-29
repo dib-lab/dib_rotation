@@ -89,8 +89,8 @@ cd trim
 Run fastp on the `SRR1976948` sample with the following command:
 
 ```
-fastp --in1 ~/2020_rotation_project/raw_data/SRR1976948_1.fastq.gz \
-  --in2 ~/2020_rotation_project/raw_data/SRR1976948_2.fastq.gz \
+fastp --in1 ../raw_data/SRR1976948_1.fastq.gz \
+  --in2 ../raw_data/SRR1976948_2.fastq.gz \
   --out1 SRR1976948_1.trim.fastq.gz \
   --out2 SRR1976948_2.trim.fastq.gz \
   --detect_adapter_for_pe \
@@ -114,6 +114,7 @@ We change the Phred quality score cutoff to `4` to be more lenient in our trimmi
 Recall from our FastQC lesson that a quality score of 10 indicates a 1 in 10 chance that the base is inaccurate. 
 A score of 20 is a 1 in 100 chance that the base is inaccurate. 30 is 1 in 1,000. And 40 in 1 in 10,000. 
 By using a score of 4, we are more likely to keep data that has a high probability of being accurate. 
+This is especially important in a metagenomics context where using stringent trimming may discard reads from organisms that are low abundance. 
 
 As done in [downloading sequencing data](05_starting_with_data.md), you can use `scp` to copy the html report to your computer.
 Make sure you're running this command _from your own computer_, not from `farm`.
@@ -134,17 +135,21 @@ You can now explore the fastp trimming report.
 
 Even after quality trimming with fastp, our reads will still contain errors. Why?
 
-First, fastp trims based solely on the quality score, which is a statistical statement about the correctness of a base - a Q score of 30 means that, of 1000 bases with that Q score, 1 of those bases will be wrong. So, a base can have a high Q score and still be wrong (and many bases will have a low Q score and still be correct)!
+First, fastp trims based solely on the quality score, which is a statistical statement about the correctness of a base - a Q score of 30 means that, of 1000 bases with that Q score, 1 of those bases will be wrong. 
+So, a base can have a high Q score and still be wrong (and many bases will have a low Q score and still be correct)!
 
-Second, we trimmed very lightly - only bases that had a very low quality were removed. This was intentional because we want to retain as much coverage as possible for our downstream techniques (many of which do not suffer too much if some errors remain).
+Second, we trimmed very lightly - only bases that had a very low quality were removed. 
+This was intentional because we want to retain as much coverage as possible for our downstream techniques (many of which do not suffer too much if some errors remain).
 
-An alternative to trimming based on the quality scores is to trim based on k-mer abundance - this is known as k-mer spectral error trimming. K-mer spectral error trimming always beats quality score trimming in terms of eliminating errors; e.g. look at this table from [Zhang et al., 2014](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0101271):
+An alternative to trimming based on the quality scores is to trim based on k-mer abundance - this is known as k-mer spectral error trimming. 
+K-mer spectral error trimming always beats quality score trimming in terms of eliminating errors; e.g. look at this table from [Zhang et al., 2014](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0101271):
 
 ![khmer output table](_static/2014-zhang.png)
 
 The basic logic is this: if you see low abundance k-mers in a high coverage data set, those k-mers are almost certainly the result of errors. (Caveat: strain variation could also create them.)
 
-In metatranscriptomic data sets we do have the problem that we may have very low and very high coverage data. So we don’t necessarily want to get rid of all low-abundance k-mers, because they may represent truly low abundance (but useful) data.
+In metatranscriptomic data sets we do have the problem that we may have very low and very high coverage data. 
+So we don’t necessarily want to get rid of all low-abundance k-mers, because they may represent truly low abundance (but useful) data.
 
 As part of the khmer project in our lab, we have developed an approach that sorts reads into high abundance and low abundance reads, and only error trims the high abundance reads.
 
@@ -194,8 +199,8 @@ Once `khmer` is installed, we can use it for k-mer trimming.
 Let's get our files and directories set up:
 ```
 cd ~/2020_rotation_project
-mkdir -p kmer-trim
-cd kmer-trim
+mkdir -p abundtrim
+cd abundtrim
 ```
 
 Now we can run k-mer trimming!
@@ -206,11 +211,11 @@ Note that these commands are connected by the pipe (`|`) character.
 This character means that the first half of the command (before the `|`) is executed first, and the output is passed ("piped") to the second half of the command (after the `|`).
 
 ```
-interleave-reads.py ~/2020_rotation_project/trim/SRR1976948_1.trim.fastq.gz ~/2020_rotation_project/trim/SRR1976948_2.trim.fastq.gz | \
-        trim-low-abund.py --gzip -C 3 -Z 18 -M 20e9 -V - -o SRR1976948.kmertrim.fq.gz
+interleave-reads.py ../trim/SRR1976948_1.trim.fastq.gz ../trim/SRR1976948_2.trim.fastq.gz | \
+        trim-low-abund.py --gzip -C 3 -Z 18 -M 20e9 -V - -o SRR1976948.abundtrim.fq.gz
 ```
-> Note: Here, we are referencing the trimmed files using an absolute path: `~/2020_rotation_project/trim/`.
-> That is, to access these files, we go to our home directory (`~`), then descend into the `2020_rotation_project` folder, then descend again into the `trim` folder.
+> Note: Here, we are referencing the trimmed files using a relative path: `../trim/`.
+> That is, to access these files, we go up one directory level (`..`), then descend into the `trim` folder.
 
 
 ### Assess changes in kmer abundance
@@ -220,7 +225,7 @@ or use the `unique-kmers.py` script. Let's compare kmers for one sample.
 
 ```
 unique-kmers.py ../trim/SRR1976948_1.trim.fastq.gz ../trim/SRR1976948_2.trim.fastq.gz
-unique-kmers.py SRR1976948.kmertrim.fq.gz
+unique-kmers.py SRR1976948.abundtrim.fq.gz
 ```  
 
 > Note, here we are using a relative path, `../trim/`.
@@ -240,9 +245,4 @@ Estimated number of unique 32-mers in SRR1976948.kmertrim.fq.gz: 329577970
 Total estimated number of unique 32-mers: 329577970
 ```
 
-Note that the second number is smaller than the first, with over 112m k-mers having been removed.
-
-### Lab notebook considerations
-
-Make sure you keep track of all commands you run for this project in a [HackMD](hackmd.io) lab notebook.
-Use backticks to create code blocks and be sure to write notes describing the purpose of each step and any problems you encountered.
+Note that the second number is smaller than the first, with over 112m k-mers removed.
