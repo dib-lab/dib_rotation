@@ -163,7 +163,7 @@ cd ~/2020_rotation_project/raw_data
 Then, use conda to install fastqc. Make sure you activate your rotation environment.
 
 ```
-conda activate 2020_rotation
+conda activate dib_rotation
 conda install fastqc
 ```
 
