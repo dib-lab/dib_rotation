@@ -3,7 +3,11 @@ Starting a Work Session on FARM
 
 Any time you log onto FARM to work on this project, follow these steps to get access to computing resources.
 
-## 1. Enter a `tmux` session
+## 1. Log in to FARM 
+
+If you haven't set up your account yet, start [here](01_farm_account.md) first.
+
+## 2. Enter a `tmux` session
 
 When you login to farm, you use your internet connection to create a secure connection between your computer and the cluster.
 If your internet connection is disrupted, even momentarily, your connection to the cluster as well as any commands that you were running will be interupted and cancelled.
@@ -21,7 +25,7 @@ tmux new -s dib
 
 Note: *If you already created this session, and want to re-join it, use `tmux a -t dib` instead.*
 
-## 2. Get access to a compute node
+## 3. Get access to a compute node
 
 
 When you log on to our `FARM` computing system, you'll be on a `login` node, which is basically a computer with very few resources. 
@@ -51,9 +55,9 @@ Note that your home directory (the files you see) will be the same for both the 
 This is because both read and write from the same hard drives. 
 This means you can create files while in an `srun` session, and they'll still be there for you when you logout.
 
-## 3. Activate your Conda Environment
+## 4. Activate your Conda Environment
 
-Once you're in an `srun` session, activate your project environment to get access to the software you've installed
+Once you're in an `srun` session, activate your project environment to get access to the software you've installed (or to start installing).
 
 ```
 conda activate dib_rotation
