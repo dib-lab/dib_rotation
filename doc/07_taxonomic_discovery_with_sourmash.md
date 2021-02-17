@@ -179,7 +179,8 @@ sourmash gather -o SRR1976948_x_genbank-k31.gather.csv SRR1976948.sig ~/2020_rot
 >  `-o SRR1976948_x_genbank-k31.gather.csv` tells sourmash to output a csv with all the results (in addition to the standard printout).
 > This csv can be used later to visualize our results.
 
-When sourmash is finished running, it tells us that 94% of our sequence was unclassified; i.e. it doesn't match any sequence in the database.
+
+When sourmash is finished running, it tells us that `the recovered matches hit 50.3% of the query`, which means nearly 50% of our sample is unclassified (doesn't match any sequence in the database).
 This is common for metagenomics, particularly for samples that are sequenced from rare environments (like Alaskan oil reservoirs).
 
 In the next lesson, we will work to improve the percent of sequence in the metagenome that is classifiable.
