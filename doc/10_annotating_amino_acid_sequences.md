@@ -36,9 +36,15 @@ kofamscan is not available as a conda package, but being able to use the KEGG fr
 We'll create a new environment for kofamscan, and use conda to install all of its dependencies.
 
 ```
-conda create -n kofamscan hmmer parallel ruby
+conda create -n kofamscan hmmer parallel ruby kofamscan
 conda activate kofamscan
 ```
+
+Now, check that the installation worked properly by running kofamscan with the `--help` option:
+```
+exec_annotation --help
+```
+> `exec_annotation` is the name of the script that runs `kofamscan`
 
 ```
 cd ~/2020_rotation_project
@@ -90,11 +96,11 @@ Now we can run kofamscan!
 We'll run it on our PLASS assembly, and then we will run it on the GenBank assembly.
 
 ```
-exec_annotation -f mapper -o query_nbhd_plass.clean_kofamscan.txt query_nbhd_plass.cdhit.fa
+exec_annotation -f mapper --config config.yml -o query_nbhd_plass.clean_kofamscan.txt query_nbhd_plass.cdhit.fa
 ```
 
 ```
-exec_annotation -f mapper -o GCA_001508995.1_ASM150899v1_protein_kofamscan.txt GCA_001508995.1_ASM150899v1_protein.faa 
+exec_annotation -f mapper --config config.yml -o GCA_001508995.1_ASM150899v1_protein_kofamscan.txt GCA_001508995.1_ASM150899v1_protein.faa
 ```
 
 This will output two files that look something like this. 
