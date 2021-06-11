@@ -14,7 +14,7 @@ If you can't fix an error or make an addition right now, file an issue with the 
     + `git push --set-upstream origin my-awesome-branch`
     + `git push` to upload updated files (all changes up to last commit)
     + when you open GitHub again in a browser, it will prompt you to open a pull request
-        + if you are correcting a filed issue, its helpful to tag the issue number in the pull request (eg `fixes issue #1234`)
+        + if you are correcting a filed issue, it's helpful to tag the issue number in the pull request (e.g. `fixes issue #1234`)
     + When integrated, your changes will automatically render on the training website.
     
 
@@ -38,4 +38,3 @@ If you can't fix an error or make an addition right now, file an issue with the 
     + this may not work if you are using `wsl`
     + the address should also be visible on the terminal output if you need to input it manually.
         + the URL is short, looks something like `http://123.0.0.1:4000/`
-
