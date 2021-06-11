@@ -45,3 +45,4 @@ nav:
   - "Advanced Modules":
     - "Automation, Workflows, and Repeatability": "11_workflows_and_repeatability.md"
     - "Version Control with Git and GitHub":  "12_angus_github.md"
+    - "Contribute on GitHub": "13_contribute_on_github.md"
