@@ -31,12 +31,11 @@ If you can't fix an error or make an addition right now, file an issue with the 
         + if you dont have mamba, use `conda create -n mkdocs mkdocs`
     +  activate that environment: `conda activate mkdocs`
     + `pip install mkdocs-material` to install the "material" theme
-+ `cd` to the repo (`dib-rotation-project`, or wherever `mkdocs.yml` is sitting) 
++ `cd` to the repo (`dib_rotation`, or wherever `mkdocs.yml` is sitting) 
 + build the docs into a website: `mkdocs build`
 + serves the site to a local webserver: `mkdocs serve`
 + a browser window might open automatically, 
     + this may not work if you are using `wsl`
     + the address should also be visible on the terminal output if you need to input it manually.
         + the URL is short, looks something like `http://123.0.0.1:4000/`
-
 
