@@ -2,7 +2,7 @@
 
 Edit these lessons on [GitHub](https://github.com/dib-lab/dib_rotation)
 
-If you can't fix an error or make an addition right now, file an issue with the doc that need changing. Each doc (shows up as a tab or page on the website) is stored as a `.md` document within the `doc` folder.
+If you can't fix an error or make an addition right now, file an issue with the doc that needs changing. Each doc (shows up as a tab or page on the website) is stored as a `.md` document within the `doc` folder.
 
 ### Creating a pull request:
 + `git clone https://github.com/dib-lab/dib_rotation.git` to clone the repo on to you computer
@@ -38,6 +38,5 @@ If you can't fix an error or make an addition right now, file an issue with the 
     + this may not work if you are using `wsl`
     + the address should also be visible on the terminal output if you need to input it manually.
         + the URL is short, looks something like `http://123.0.0.1:4000/`
-
 
 
