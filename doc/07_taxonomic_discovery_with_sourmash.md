@@ -51,7 +51,7 @@ If we have adapters or errors in our reads, these won't match to the assemblies 
 However, even though we very lightly trimmed our reads, there is a chance that we removed a very low abundance organism that was truly present in the sample. 
 
 ```
-ln -s ~/2020_rotation_project/raw_data/*fastq.gz .
+ln -s ~/2020_rotation_project/raw_data/*fastq.gz ./
 ```
 
 We need to generate a signature using sourmash. 

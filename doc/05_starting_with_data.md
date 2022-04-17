@@ -198,7 +198,7 @@ environment on your local computer as well.
 Now, from the terminal open to your local computer, copy over the fastqc HTML files using `scp`, a "secure copy" program.
 
 ```
-scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/raw_data/*.html .
+scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/raw_data/*.html ./
 ```
 
 >   - -P 2022 tells scp to use the 2022 port on farm, which is our data transfer port

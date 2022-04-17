@@ -96,7 +96,7 @@ We'll use BLAST to compare all of the protein sequences in our PLASS assembly to
 We just downloaded the GenBank assembly amino acid sequences to our `blast` folder, let's link in our PLASS amino acid assembly.
 
 ```
-ln -s ../plass/query_nbhd_plass.cdhit.fa .
+ln -s ../plass/query_nbhd_plass.cdhit.fa ./
 ```
 
 Next, we need to install BLAST into our environment.

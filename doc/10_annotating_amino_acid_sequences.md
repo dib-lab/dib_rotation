@@ -50,8 +50,8 @@ exec_annotation --help
 cd ~/2020_rotation_project
 mkdir -p kofamscan
 cd kofamscan
-ln -s ../plass/query_nbhd_plass.cdhit.fa .
-ln -s ../blast/GCA_001508995.1_ASM150899v1_protein.faa .
+ln -s ../plass/query_nbhd_plass.cdhit.fa ./
+ln -s ../blast/GCA_001508995.1_ASM150899v1_protein.faa ./
 ```
 
 Then, download the databases and executables for the kofamscan program.
