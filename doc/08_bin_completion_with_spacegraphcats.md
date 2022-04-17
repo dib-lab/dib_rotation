@@ -235,7 +235,7 @@ We will use sourmash to do this. We already have a sourmash signature our neighb
 Let's make a signature for our query as well, and then use `sourmash compare` to compare them.
 
 ```
-sourmash compute -k 21,31,51 --scaled 2000 -o GCA_001508995.1_ASM150899v1_genomic.sig GCA_001508995.1_ASM150899v1_genomic.fna.gz
+sourmash sketch -p k=21,k=31,k=51,scaled=2000 -o GCA_001508995.1_ASM150899v1_genomic.sig GCA_001508995.1_ASM150899v1_genomic.fna.gz
 ```
 
 ```

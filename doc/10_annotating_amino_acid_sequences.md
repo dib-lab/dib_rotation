@@ -36,7 +36,7 @@ kofamscan is not available as a conda package, but being able to use the KEGG fr
 We'll create a new environment for kofamscan, and use conda to install all of its dependencies.
 
 ```
-conda create -n kofamscan hmmer parallel ruby kofamscan
+mamba create -n kofamscan hmmer parallel ruby kofamscan
 conda activate kofamscan
 ```
 
@@ -123,7 +123,7 @@ NORP88_10	K07507
 Lastly, use [KEGGDecoder](https://github.com/bjtully/BioData/tree/master/KEGGDecoder) to visualize the differences in KEGG pathways. 
 
 ```
-conda install pip
+mamba install pip
 pip install KEGGDecoder
 ```
 
@@ -156,7 +156,7 @@ and [wiki documentation](https://github.com/elizabethmcd/metabolisHMM/wiki) to i
 > that did not have amino acid sequences associated with it yet?    
 > We can generate amino acid sequences from nucleotide sequences,   
 > as well as first-pass annotations, using a tool called `prokka`.  
-> We can use conda to install prokka: `conda install prokka`  
+> We can use conda to install prokka: `mamba install prokka`  
 > To run prokka on a bin derived from a metagenome, use:  
 > ```
 > prokka {input} --outdir {outdir} --prefix {bin} --metagenome --force --locustag {bin}

@@ -30,8 +30,10 @@ Let's install sourmash
 
 ```
 conda activate dib_rotation
-conda install -y -c conda-forge -c bioconda sourmash
+mamba install -y sourmash
 ```
+(we actually already did this in the very beginning, but it doesn't hurt to
+rerun conda installs!)
 
 Next, let's create a directory in which to store our sourmash results
 
@@ -57,33 +59,29 @@ A signature is a compressed representation of the k-mers in the sequence.
 Using this data structure instead of the reads makes sourmash much faster.
 
 ```
-sourmash compute -o SRR1976948.sig --merge SRR1976948 --scaled 2000 -k 21,31,51 --track-abundance SRR1976948_*fastq.gz
+sourmash sketch -o SRR1976948.sig --name SRR1976948 -p scaled=2000,k=21,k=31,k=51,abund SRR1976948_*fastq.gz
 ```
 
 The outputs file, `SRR1976948.sig` holds a representative subset of k-mers from our original sample, as well as their abundance information. 
 The k-mers are "hashed", or transformed, into numbers to make selecting, storing, and looking up the k-mers more efficient.
 
-## Sourmash lca gather
+## Sourmash gather
 
-Sourmash provides two methods for estimating the taxonomic composition of known sequences in a metagenome, `sourmash gather` and `sourmash lca gather`. 
-`sourmash gather` gives strain-level specificity to matches in its output -- e.g. all strains that match any sequences (above a threshold) in your metagenome will be reported, along with the percent of each strain that matches. 
+Sourmash provides several methods for estimating the composition of known sequences in a metagenome. `sourmash gather` is the primary technique ([ref](https://www.biorxiv.org/content/10.1101/2022.01.11.475838)) -
+it gives strain-level specificity to matches in its output -- e.g. all strains that match any sequences (above a threshold) in your metagenome will be reported, along with the percent of each strain that matches. 
 This is useful both to estimate the amount of your metagenome that is known, and to estimate the closest strain relative to the thing that is in your metagenome. 
-`sourmash lca gather` provides a similar output, but also provides taxonomic information for the match.
-This means that both an assembly and a taxonomy are required for inclusion in the database. 
-Because of the underlying data structures, `sourmash lca gather` is faster, but also requires more memory.
-Farm has plenty of resources, so we will run the faster command.
 
-Download and unzip the database:
+Download and unzip the sourmash database:
 
 ```
 curl -L https://osf.io/4f8n3/download -o genbank-k31.lca.json.gz
 gunzip genbank-k31.lca.json.gz
 ```
 
-And then run `lca gather`
+And then run `gather`
 
 ```
-sourmash lca gather -o SRR1976948_lca_gather.csv SRR1976948.sig genbank-k31.lca.json
+sourmash gather -o SRR1976948_gather.csv SRR1976948.sig genbank-k31.lca.json
 ```
 
 We see an output that looks like this:

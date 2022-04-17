@@ -31,11 +31,19 @@ Channels in Conda are ordered.
 The channel with the highest priority is the first one that Conda checks, looking for the package you asked for. 
 You can change this order, and also add channels to it (and set their priority as well).
 
-If multiple channels contain a package, and one channel contains a newer version than the other one, the order of the channels’ determines which one of these two versions are going to be installed, even if the higher priority channel contains the older version.
+If multiple channels contain a package, and one channel contains a newer version than the other one, the order of the channels determines which one of these two versions are going to be installed, even if the higher priority channel contains the older version.
 ```
 conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
+```
+
+Let's also install the
+[mamba alternative frontend to conda](https://github.com/mamba-org/mamba),
+which is much faster than using 'conda' to install software --
+
+```
+conda install -y "mamba>=0.22.1"
 ```
 
 ## Creating an environment
@@ -43,10 +51,12 @@ conda config --add channels conda-forge
 Now that we have conda installed and our channels configured, we are ready to create an environment.
 
 ```
-conda create -y -n dib_rotation
+mamba create -y -n dib_rotation "python=3.8"
 ```
 
-This creates an empty environment named `dib_rotation`. 
+This creates an environment named `dib_rotation` that uses Python 3.8,
+which is necessary for some of the later software.
+
 To activate this environment, run:
 
 ```
@@ -59,7 +69,7 @@ We can now install software into our environment.
 Let's install sourmash, which we will use in a later lesson. 
 
 ```
-conda install -y sourmash
+mamba install -y sourmash
 ```
 
 ## Deactivating and Exiting
