@@ -28,7 +28,7 @@ theme:
   
 # optionally give a title for each page or section
 nav:
-  - 'Home': '00_getting_started.md'
+  - 'Home': 'index.md'
   - "Setup":
     - "Setting up Farm": "01_farm_account.md"
     - "Install Conda": "02_conda.md"
