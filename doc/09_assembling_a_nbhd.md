@@ -32,7 +32,7 @@ Then, we can install PLASS into our `dib_rotation` environment.
 
 ```
 conda activate dib_rotation
-conda install plass
+mamba install plass
 ```
 Now we can run PLASS!
 
@@ -63,7 +63,7 @@ First, install CD-HIT. Make sure you're in your `dib_rotation` environment.
 If you're not, run `conda activate dib_rotation`.
 
 ```
-conda install cd-hit
+mamba install cd-hit
 ```
 
 Then run CD-HIT
@@ -89,14 +89,14 @@ gunzip GCA_001508995.1_ASM150899v1_protein.faa.gz
 
 There are many, many ways that we could compare the amino acid sequences between the two sequences. 
 
-We could use `sourmash compute` with the `--protein` flag to generate signatures for both of our amino acid fasta files, and then use `sourmash compare` to compare them. 
+We could use `sourmash sketch protein` to generate signatures for both of our amino acid fasta files, and then use `sourmash compare` to compare them. 
 Since we've used `sourmash` quite a bit, let's take a different approach that will give us a more detailed answer.
 
 We'll use BLAST to compare all of the protein sequences in our PLASS assembly to all of the protein sequences in the GenBank assembly. 
 We just downloaded the GenBank assembly amino acid sequences to our `blast` folder, let's link in our PLASS amino acid assembly.
 
 ```
-ln -s ../plass/query_nbhd_plass.cdhit.fa .
+ln -s ../plass/query_nbhd_plass.cdhit.fa ./
 ```
 
 Next, we need to install BLAST into our environment.
@@ -104,7 +104,7 @@ Make sure you're in your `dib_rotation` environment.
 If you're not, run `conda activate dib_rotation`.
 
 ```
-conda install blast
+mamba install blast
 ```
 
 Now we can use BLAST to compare our two sequences!
@@ -134,8 +134,7 @@ We'll install two R packages, which will bring along all of the R dependencies.
 and `Biostrings` makes reading amino acid sequences simple.
 
 ```
-conda deactivate
-conda create -n renv r-dplyr=0.8.3 bioconductor-biostrings=2.54.0 
+mamba create -n renv r-dplyr=0.8.3 bioconductor-biostrings=2.54.0 
 ```
 
 Once installed, activate the new environment

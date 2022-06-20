@@ -74,7 +74,7 @@ Fastp also creates its own FastQC-style `html` reports for the files that we can
 Install fastp:
 
 ```
-conda install -y fastp
+mamba install -y fastp
 ```
 
 We can now trim our data!
@@ -190,7 +190,7 @@ We need to install the software we will use to perform k-mer trimming, `khmer`.
 Make sure you've activated the conda environment you are using for this project before running this command!
 
 ```
-conda install -y khmer
+mamba install -y khmer
 ```
 
 ### Using khmer for k-mer trimming

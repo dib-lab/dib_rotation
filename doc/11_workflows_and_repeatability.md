@@ -123,7 +123,7 @@ Here, we'll demo how to run the same steps above, but in Snakemake.
 
 First, let's install snakemake in our conda environment:
 ```
-conda install -y snakemake-minimal
+mamba install -y snakemake-minimal
 ```
 
 We're going to automate the same set of commands for trimming, but in snakemake.

@@ -19,7 +19,7 @@ It is publicly viewable, but cannot be "unlocked" without the private key file.
 
 We need to generate a key file pair in order to create a farm account. 
 
-Open the `Terminal` application or the Terminal emulator you installed in the [first_lesson](00_getting_started.md).
+Open the `Terminal` application or the Terminal emulator you installed in the [first_lesson](index.md).
 
 Change directories into the `.ssh` folder.
 This folder is where key file pairs are typically stored.

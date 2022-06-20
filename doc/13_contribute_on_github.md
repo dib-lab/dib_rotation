@@ -28,7 +28,7 @@ If you can't fix an error or make an addition right now, file an issue with the 
 ### View the updated rendered website locally:
 + make a conda env 
     + `mamba create -n mkdocs mkdocs`  
-        + if you dont have mamba, use `conda create -n mkdocs mkdocs`
+        + if you dont have mamba, use `mamba create -n mkdocs mkdocs`
     +  activate that environment: `conda activate mkdocs`
     + `pip install mkdocs-material` to install the "material" theme
 + `cd` to the repo (`dib_rotation`, or wherever `mkdocs.yml` is sitting) 

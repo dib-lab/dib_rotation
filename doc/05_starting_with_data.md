@@ -160,11 +160,11 @@ We will now assess the quality of the reads that we downloaded. First, make sure
 cd ~/2020_rotation_project/raw_data
 ```
 
-Then, use conda to install fastqc. Make sure you activate your rotation environment.
+Then, use conda to install fastqc. Make sure you activate your rotation environment.  (We're using the `mamba` command instead of `conda` because it's faster.)
 
 ```
 conda activate dib_rotation
-conda install fastqc
+mamba install -y fastqc
 ```
 
 FastQC can accept multiple file names as input, and on both zipped and unzipped files, so we can use the \*.fastq* wildcard to run FastQC on all of the FASTQ files in this directory.
@@ -198,7 +198,7 @@ environment on your local computer as well.
 Now, from the terminal open to your local computer, copy over the fastqc HTML files using `scp`, a "secure copy" program.
 
 ```
-scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/raw_data/*.html .
+scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/raw_data/*.html ./
 ```
 
 >   - -P 2022 tells scp to use the 2022 port on farm, which is our data transfer port
