@@ -120,7 +120,7 @@ As done in [downloading sequencing data](05_starting_with_data.md), you can use 
 Make sure you're running this command _from your own computer_, not from `farm`.
 
 ```
-scp -P 2022  -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/trim/*.html ./
+scp -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/trim/*.html ./
 ```
 
 If you're on a mac using `zsh`, you may need to replace the `scp` with `noglob scp` in the command above.
