@@ -69,7 +69,7 @@ ssh -i ~/.ssh/your_keyfile_name username@farm.cse.ucdavis.edu
 ```
 
 If you are successful, you will see a message that looks something like this:
-
+*Farm user name might be different than email, if email does not work. Try using UC Davis computing account user name.
 ```
 Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-70-generic x86_64)
 
