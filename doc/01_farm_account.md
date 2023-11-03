@@ -45,14 +45,13 @@ Two files will be created by this command.
 These files should have the same prefix.
 The file that ends in `.pub` is the public key.
 
-### [The account request form](https://wiki.cse.ucdavis.edu/cgi-bin/index2.pl)
+### [The account request form](https://hippo.ucdavis.edu/Farm/active)
 
-Next, navigate to [this page](https://wiki.cse.ucdavis.edu/cgi-bin/index2.pl).
-From the first drop down menu (Which cluster are you applying for an account on?), select `FARM/CAES`.
-From the second drop down menu (Who is sponsoring your account?), select `Brown, C. Titus`.
-Then, upload your public key file to the page. 
+Next, navigate to [this page](https://hippo.ucdavis.edu/Farm/active).
+From the first drop down menu (Which cluster are you applying for an account on?), select `vetmed`.
+Then, upload your public key file to the page.
 Submit the form. 
-If the cluster admins and Titus approve your account, you will now have farm access!
+If the cluster admins approve your account, you will now have farm access!
 Don't loose the key file pair you just made. 
 You will need the private key file each time you log into farm.
 
