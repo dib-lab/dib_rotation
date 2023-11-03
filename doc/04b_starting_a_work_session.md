@@ -15,7 +15,7 @@ For long running commands, this creates a problem.
 Even if you have great internet connection, you may want to shut your computer or move to a different location. 
 In order to keep a "session" alive and to allow a command to continue to run when we close our connection to farm, we use a tool called tmux.
 You can think of tmux as minimizing your session and allowing things to run. 
-For more on tmux, please see [this lesson](https://datacarpentry.org/cloud-genomics/03-verifying-instance/index.html).
+For more on tmux, please see [this lesson](https://datacarpentry.org/cloud-genomics/03-verifying-instance).
 
 This command creates a new `tmux` session:
 
@@ -45,7 +45,7 @@ srun -p bmm -J rotation -t 5:00:00 --mem=10G --pty bash
 > -  `srun` uses the computer's job scheduler `SLURM` to allocate you a computer
 > - `-p` specifies the job queue we want to use, and is specific to our `farm` accounts.
 > - `-J rotation` is the "job name" assigned to this session. It can be modified to give your session a more descriptive name, e.g. `-J download-data`
-> - `-t` denotes that we want the computer for that amount of time (in this case, 3 hours).
+> - `-t` denotes that we want the computer for that amount of time (in this case, 5 hours).
 > - `--mem` specifies the amount of memory we'd like the computer to have. Here we've asked for 10 Gigabytes (10G). 
 > - `--pty bash` specified that we want the linux shell to be the `bash` shell, which is the standard shell we've been working wiht so far
 
