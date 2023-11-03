@@ -183,7 +183,7 @@ displaying the summary report for each of our samples.
 ## Transferring data from Farm to your computer
 
 To transfer a file from a remote server to our own machines, we will use `scp`. 
-To learn more about `scp`, see the bottom of [this tutorial](https://datacarpentry.org/shell-genomics/05-writing-scripts/).
+To learn more about `scp`, see the bottom of [this tutorial](https://datacarpentry.org/shell-genomics/05-writing-scripts).
 
 
 We've currently been running commands on a terminal open on `farm`. 
