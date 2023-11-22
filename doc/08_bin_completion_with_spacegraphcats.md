@@ -215,6 +215,26 @@ searchquick: GCA_001508995.1_ASM150899v1_genomic.fna.gz
 Use a text editor such as nano or vim to generate this file, and call it `conf1.yml`.
 (Here's a tutorial on using [nano](https://datacarpentry.org/shell-genomics/05-writing-scripts/).)
 
+For user using vim.
+First, create a file
+``` 
+vim conf1.yml
+
+```
+Press i to enter insert mode. You should see "-- INSERT -- "at the bottom of the terminal, indicating that you are now in insert mode. 
+``` 
+ 
+~                                                                  
+~                                                                  
+~                                                                  
+-- INSERT --                                     4,1           All
+
+```
+type :wq and press Enter to save the file and exit vim
+
+ 
+
+
 Now we're ready to run spacegraphcats!
 
 ```
