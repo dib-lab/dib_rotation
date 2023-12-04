@@ -170,18 +170,20 @@ go back to home directory
 ```
 cd ~
 ```
-Then go to the internet and clon spacegraphcats remote repository from GitHub to our local computer
+Then clone spacegraphcats remote repository from GitHub to our remote computer on Farm
 ```
 git clone https://github.com/spacegraphcats/spacegraphcats/
 ```
-using the "environment.yml" file in spacegraphcats repository in our local computer, create a Conda environment named "sgc" 
+Using the "environment.yml" file in your newly clones spacegraphcats repository, create a conda environment with all spacegraphcat's dependencies and named the conda environment "sgc".
 ```
 conda env create -f spacegraphcats/environment.yml -n sgc
 ``` 
-activate conda environment "sgc", install prereleased spacegraphcats package in "sgc" 
-
+Activate the new conda environment, "sgc"
 ```
 conda activate sgc
+```
+Install beta version of spacegraphcats package in the "sgc" envirnoment.
+```
 pip install --pre spacegraphcats
 ```
 Next, we need to decide what query we'd like to use. 
