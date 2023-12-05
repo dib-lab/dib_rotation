@@ -39,18 +39,44 @@ If we click on the result, we see the following page:
 We can click directly on the `FASTQ files (FTP)` to download them to our computer.
 Alternative, we can copy the links and use these to download the files to a remote computer like Farm.
 
-Before we download these files, let's set up a directory structure that will help us stay organized.
+Before we download these files, let's set up a directory structure that will help us stay organized. 
+
+go back to home directory 
+ 
+```
+cd ~
+```
+Then clone spacegraphcats remote repository from GitHub to our remote computer on Farm
+```
+git clone https://github.com/spacegraphcats/spacegraphcats/
+```
+Using the "environment.yml" file in your newly clones spacegraphcats repository, create a conda environment with all spacegraphcat's dependencies and named the conda environment `sgc`.
+```
+conda env create -f spacegraphcats/environment.yml -n sgc
+``` 
+Activate the new conda environment `sgc`.
+```
+conda activate sgc
+```
+Install beta version of spacegraphcats package in the `sgc` envirnoment.
+```
+pip install --pre spacegraphcats
+```
+go back to home directory and make a directory named `2020_rotation_project` 
 
 ```
 cd ~
-mkdir 2020_rotation_project
+mkdir 2020_rotation_project 
+```
+inside `2020_rotation_project`, make a new directory named `raw_data`
+``` 
 cd 2020_rotation_project
 mkdir raw_data
 cd raw_data
 ```
-
 Then, we can download the data into our `raw_data` directory.
 
+wget stands for web get, the command download files from the internet
 ```
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR197/008/SRR1976948/SRR1976948_1.fastq.gz
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR197/008/SRR1976948/SRR1976948_2.fastq.gz
