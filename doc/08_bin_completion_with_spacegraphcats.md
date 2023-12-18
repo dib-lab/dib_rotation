@@ -174,15 +174,15 @@ Then clone spacegraphcats remote repository from GitHub to our remote computer o
 ```
 git clone https://github.com/spacegraphcats/spacegraphcats/
 ```
-Using the "environment.yml" file in your newly clones spacegraphcats repository, create a conda environment with all spacegraphcat's dependencies and named the conda environment "sgc".
+Using the "environment.yml" file in your newly clones spacegraphcats repository, create a conda environment with all spacegraphcat's dependencies and named the conda environment `sgc`.
 ```
 conda env create -f spacegraphcats/environment.yml -n sgc
 ``` 
-Activate the new conda environment, "sgc"
+Activate the new conda environment `sgc`.
 ```
 conda activate sgc
 ```
-Install beta version of spacegraphcats package in the "sgc" envirnoment.
+Install beta version of spacegraphcats package in the `sgc` envirnoment.
 ```
 pip install --pre spacegraphcats
 ```

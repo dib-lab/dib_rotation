@@ -34,12 +34,19 @@ Then, we can install PLASS into our `dib_rotation` environment.
 conda activate dib_rotation
 mamba install plass
 ```
-Now we can run PLASS!
-
+Go back to directory `2020_rotation_project`. Make a new directory `plass` to store the data.
 ```
 cd ~/2020_rotation_project
 mkdir -p plass
 cd plass
+```
+
+Now we can run PLASS!
+
+Note, here we are using a relative path, `../sgc/`.
+That is, to access the `SRR1976948_k31_r1_search_oh0/GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.gz` files, we go up one directory (`../`), then down into `sgc`.
+
+```
 plass assemble ../sgc/SRR1976948_k31_r1_search_oh0/GCA_001508995.1_ASM150899v1_genomic.fna.gz.cdbg_ids.reads.gz query_nbhd_plass.fa tmp
 ```
 
@@ -76,13 +83,17 @@ cd-hit -c 1 -i  query_nbhd_plass.fa.nostop.fa -o  query_nbhd_plass.cdhit.fa
 
 Let's compare the amino acid sequences in our neighborhood to those in the query.
 
-First, download amino acid sequences in the query. 
-Not every GenBank record has translated amino acid sequences, but because ours does, we can use them.
-
+Go back to directory `2020_rotation_project`. Make a new directory `blast` to store the data.
 ```
 cd ~/2020_rotation_project
 mkdir -p blast
 cd blast
+```
+Download amino acid sequences in the query. 
+Not every GenBank record has translated amino acid sequences, but because ours does, we can use them. 
+Use `wget` to download the file from the internet.
+
+```
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/508/995/GCA_001508995.1_ASM150899v1/GCA_001508995.1_ASM150899v1_protein.faa.gz
 gunzip GCA_001508995.1_ASM150899v1_protein.faa.gz
 ```
