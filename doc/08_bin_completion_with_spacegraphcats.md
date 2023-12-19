@@ -201,6 +201,8 @@ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/508/995/GCA_001508995.1_ASM1
 Now that we have our query, we need to construct a configuration file that spacegraphcats will use to run.
 This file specifies the name of the spacegraphcats data structure (`catlas_base`), the file paths for the metagenome reads and the query sequence, the k-mer size at which to build the cDBG, and the "radius" (or size) at which to perform the queries.
 
+The file will contain:
+
 ```
 catlas_base: 'SRR1976948'
 input_sequences:
@@ -213,27 +215,57 @@ searchquick: GCA_001508995.1_ASM150899v1_genomic.fna.gz
 ```
 
 Use a text editor such as nano or vim to generate this file, and call it `conf1.yml`.
-(Here's a tutorial on using [nano](https://datacarpentry.org/shell-genomics/05-writing-scripts/).)
+(Here's a tutorial on using [nano](https://datacarpentry.org/shell-genomics/05-writing-scripts).)
 
-For user using vim.
-First, create a file
+For using vim, however...
+
+First, create a file with the `vi` or `vim` command. This creates a file called `conf1.yml`, opens the file in vim.
+
 ``` 
 vim conf1.yml
-
 ```
-Press i to enter insert mode. You should see "-- INSERT -- "at the bottom of the terminal, indicating that you are now in insert mode. 
+
+Upon entering, vim is set to `normal` mode. This allows the user to use commands directly on the file and so much more.
+Now, press `i` to enter `insert` mode. You should see "-- INSERT -- "at the bottom of the terminal, indicating that you are now able to alter you text file. Paste the copied `conf1.yaml` text now.
+
+Your terminal should look similar to this:
+
 ``` 
- 
+catlas_base: 'SRR1976948'
+input_sequences:
+- ../abundtrim/SRR1976948.abundtrim.fq.gz
+ksize: 31
+radius: 1
+search:
+- GCA_001508995.1_ASM150899v1_genomic.fna.gz
+searchquick: GCA_001508995.1_ASM150899v1_genomic.fna.gz
 ~                                                                  
 ~                                                                  
 ~                                                                  
--- INSERT --                                     4,1           All
+-- INSERT --                                     1,1           All
+```
+
+To save the file and exit the vim text editor, you need to exit `insert` mode with `esc`. You are now back in `normal` mode. Yay!... But, how do you leave the file?
+Type `:wq` and press Enter to save the file and exit vim.
+> - `:` switches vim to command-line mode
+> - `:w` writes changes to a file
+> - `:q` quits a file
+> - `:wq` writes and quits a file
+
+One final option is to use `cat` to write multiple lines of text into a file between two End Of File (`EOF`) markers:
 
 ```
-type :wq and press Enter to save the file and exit vim
-
- 
-
+cat > conf1.yaml << EOF
+catlas_base: 'SRR1976948'
+input_sequences:
+- ../abundtrim/SRR1976948.abundtrim.fq.gz
+ksize: 31
+radius: 1
+search:
+- GCA_001508995.1_ASM150899v1_genomic.fna.gz
+searchquick: GCA_001508995.1_ASM150899v1_genomic.fna.gz
+EOF
+```
 
 Now we're ready to run spacegraphcats!
 
