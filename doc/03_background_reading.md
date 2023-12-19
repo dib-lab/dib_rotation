@@ -1,9 +1,9 @@
 + [Multiple levels of the unknown in microbiome research](https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-019-0667-z)
   + A good primer on the field of metagenomics
 + [Metagenomic Assembly: Overview, Challenges and Applications](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5045144/)
-  + A good primer on the field of metagenomics
+  + Another good overview of the field of metagenomics
 + [Quick insights from sequencing data with sourmash](https://angus.readthedocs.io/en/2019/sourmash.html)
-  + A tutorial and explanation of sourmash, including a definition of k-mers, computing sourmash signatures, comparing RNA-seq samples quickl, detecting eukaryotic contamination in raw RNA-seq reads, building your own database for searching, and other sourmash databases. 
+  + A tutorial and explanation of sourmash, including a definition of k-mers, computing sourmash signatures, comparing RNA-seq samples quickly, detecting eukaryotic contamination in raw RNA-seq reads, building your own database for searching, and other sourmash databases. 
 + [Large-scale sequence comparisons with sourmash ](https://f1000research.com/articles/8-1006)
   + Background on the theory of different commands included in sourmash, accompanied by three small tutorials
 + [Exploring neighborhoods in large metagenome assembly graphs using spacegraphcats reveals hidden sequence diversity](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02066-4)
