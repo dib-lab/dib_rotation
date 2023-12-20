@@ -41,42 +41,60 @@ Alternative, we can copy the links and use these to download the files to a remo
 
 Before we download these files, let's set up a directory structure that will help us stay organized. 
 
-go back to home directory 
+Go back to home directory 
  
 ```
 cd ~
 ```
-Then clone spacegraphcats remote repository from GitHub to our remote computer on Farm
+> - `cd` change directory
+> - `~` shortcut for user's home directory
+
+Clone the spacegraphcats remote repository from GitHub to our remote computer on the Farm
+
 ```
 git clone https://github.com/spacegraphcats/spacegraphcats/
 ```
-Using the "environment.yml" file in your newly clones spacegraphcats repository, create a conda environment with all spacegraphcat's dependencies and named the conda environment `sgc`.
+
+Using the "environment.yml" file in your newly clones spacegraphcats repository, create a named (sgc) conda environment with the dependencies required to run spacegraphcats.
+
 ```
 conda env create -f spacegraphcats/environment.yml -n sgc
-``` 
+```
+> - `conda env create` will create a new conda environment
+> - `-f` points to the file containing the environment specifications
+> - `-n` specifies a name to give your new environment
+> - Consider adding `-y` to proceed with the download without user confirmation
+
 Activate the new conda environment `sgc`.
+
 ```
 conda activate sgc
 ```
-Install beta version of spacegraphcats package in the `sgc` envirnoment.
+
+Install the beta version of spacegraphcats package in the `sgc` envirnoment with `pip`.
+
 ```
 pip install --pre spacegraphcats
 ```
-go back to home directory and make a directory named `2020_rotation_project` 
+
+Go back to home directory and make a directory named `2020_rotation_project`.
 
 ```
 cd ~
 mkdir 2020_rotation_project 
 ```
-inside `2020_rotation_project`, make a new directory named `raw_data`
+
+Navigate inside `2020_rotation_project`, make a new directory named `raw_data`, and navigate into the `raw_data` directory.
+
 ``` 
 cd 2020_rotation_project
 mkdir raw_data
 cd raw_data
 ```
-Then, we can download the data into our `raw_data` directory.
 
-wget stands for web get, the command download files from the internet
+Then, we can download the data into our `raw_data` directory with `wget`.
+`wget` stands for web get, and (unsurprisingly) the command download files from across the internet.
+
 ```
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR197/008/SRR1976948/SRR1976948_1.fastq.gz
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR197/008/SRR1976948/SRR1976948_2.fastq.gz
