@@ -41,46 +41,17 @@ Alternative, we can copy the links and use these to download the files to a remo
 
 Before we download these files, let's set up a directory structure that will help us stay organized. 
 
-Go back to home directory 
- 
+Go to your base home directory
+
 ```
 cd ~
 ```
 > - `cd` change directory
 > - `~` shortcut for user's home directory
 
-Clone the spacegraphcats remote repository from GitHub to our remote computer on the Farm
+Make a directory named `2020_rotation_project`
 
 ```
-git clone https://github.com/spacegraphcats/spacegraphcats/
-```
-
-Using the "environment.yml" file in your newly clones spacegraphcats repository, create a named (sgc) conda environment with the dependencies required to run spacegraphcats.
-
-```
-conda env create -f spacegraphcats/environment.yml -n sgc
-```
-> - `conda env create` will create a new conda environment
-> - `-f` points to the file containing the environment specifications
-> - `-n` specifies a name to give your new environment
-> - Consider adding `-y` to proceed with the download without user confirmation
-
-Activate the new conda environment `sgc`.
-
-```
-conda activate sgc
-```
-
-Install the beta version of spacegraphcats package in the `sgc` envirnoment with `pip`.
-
-```
-pip install --pre spacegraphcats
-```
-
-Go back to home directory and make a directory named `2020_rotation_project`.
-
-```
-cd ~
 mkdir 2020_rotation_project 
 ```
 
