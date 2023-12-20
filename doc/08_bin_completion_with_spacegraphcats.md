@@ -166,26 +166,40 @@ srun -p bmh -J sgc -t 48:00:00 --mem=70gb -c 2 --pty bash
 Make sure you start from the base environment.
 If you're in another environment (e.g. `dib_rotation`), run `conda deactivate`.
 
-go back to home directory
+Go back to home directory.
+ 
 ```
 cd ~
 ```
-Then clone spacegraphcats remote repository from GitHub to our remote computer on Farm
+
+Clone the spacegraphcats remote repository from GitHub to our remote computer on the Farm.
+
 ```
 git clone https://github.com/spacegraphcats/spacegraphcats/
 ```
-Using the "environment.yml" file in your newly clones spacegraphcats repository, create a conda environment with all spacegraphcat's dependencies and named the conda environment "sgc".
+
+Using the "environment.yml" file in your newly clones spacegraphcats repository, create a named (sgc) conda environment with the dependencies required to run spacegraphcats.
+
 ```
 conda env create -f spacegraphcats/environment.yml -n sgc
-``` 
-Activate the new conda environment, "sgc"
+```
+> - `conda env create` will create a new conda environment
+> - `-f` points to the file containing the environment specifications
+> - `-n` specifies a name to give your new environment
+> - Consider adding `-y` to proceed with the download without user confirmation
+
+Activate the new conda environment `sgc`.
+
 ```
 conda activate sgc
 ```
-Install beta version of spacegraphcats package in the "sgc" envirnoment.
+
+Install the beta version of spacegraphcats package in the `sgc` envirnoment with `pip`.
+
 ```
 pip install --pre spacegraphcats
 ```
+
 Next, we need to decide what query we'd like to use. 
 Let's try *Desulfotomaculum sp. 46_80*, which we saw from sourmash is 100% present in the metagenome
 
