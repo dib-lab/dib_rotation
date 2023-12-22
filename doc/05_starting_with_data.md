@@ -39,9 +39,9 @@ If we click on the result, we see the following page:
 We can click directly on the `FASTQ files (FTP)` to download them to our computer.
 Alternative, we can copy the links and use these to download the files to a remote computer like Farm.
 
-Before we download these files, let's set up a directory structure that will help us stay organized. 
+Before we download these files, let's set up a directory structure that will help us stay organized.
 
-Go to your base home directory
+Go to your base home directory:
 
 ```
 cd ~
@@ -64,7 +64,7 @@ cd raw_data
 ```
 
 Then, we can download the data into our `raw_data` directory with `wget`.
-`wget` stands for web get, and (unsurprisingly) the command download files from across the internet.
+`wget` stands for web get, and is a command to download files from Web sites.
 
 ```
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR197/008/SRR1976948/SRR1976948_1.fastq.gz
