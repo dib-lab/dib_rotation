@@ -166,35 +166,35 @@ srun -p bmh -J sgc -t 48:00:00 --mem=70gb -c 2 --pty bash
 Make sure you start from the base environment.
 If you're in another environment (e.g. `dib_rotation`), run `conda deactivate`.
 
-Go back to home directory.
+Go back to your home directory:
  
 ```
 cd ~
 ```
 
-Clone the spacegraphcats remote repository from GitHub to our remote computer on the Farm.
+Clone the spacegraphcats remote repository from GitHub to our remote computer on Farm:
 
 ```
 git clone https://github.com/spacegraphcats/spacegraphcats/
 ```
 
-Using the "environment.yml" file in your newly clones spacegraphcats repository, create a named (sgc) conda environment with the dependencies required to run spacegraphcats.
+Using the `environment.yml` file in your newly clones spacegraphcats repository, create a new conda environment with the dependencies required to run spacegraphcats, named `sgc`:
 
 ```
 conda env create -f spacegraphcats/environment.yml -n sgc
 ```
-> - `conda env create` will create a new conda environment
+
+> - `conda env create` will create a new conda environment from a file
 > - `-f` points to the file containing the environment specifications
 > - `-n` specifies a name to give your new environment
-> - Consider adding `-y` to proceed with the download without user confirmation
 
-Activate the new conda environment `sgc`.
+Activate the new `sgc` conda environment:
 
 ```
 conda activate sgc
 ```
 
-Install the beta version of spacegraphcats package in the `sgc` envirnoment with `pip`.
+Install the beta version of spacegraphcats package in the `sgc` environment with `pip`.
 
 ```
 pip install --pre spacegraphcats
@@ -245,7 +245,7 @@ Use a text editor such as nano or vim to generate this file, and call it `conf1.
 
 For using vim, however...
 
-First, create a file with the `vi` or `vim` command. This creates a file called `conf1.yml`, opens the file in vim.
+First, create a file with the `vi` or `vim` command. This creates a file called `conf1.yml` and opens the file in vim.
 
 ``` 
 vim conf1.yml
@@ -278,7 +278,7 @@ Type `:wq` and press Enter to save the file and exit vim.
 > - `:q` quits a file
 > - `:wq` writes and quits a file
 
-One final option is to use `cat` to write multiple lines of text into a file between two End Of File (`EOF`) markers:
+One final option is to use `cat` to write multiple lines of text into a file between two End Of File (`EOF`) markers. Copy and paste all 11 lines below into your shell prompt at once:
 
 ```
 cat > conf1.yaml << EOF

@@ -50,9 +50,10 @@ The file that ends in `.pub` is the public key.
 Next, navigate to [this page](https://hippo.ucdavis.edu/Farm/active).
 From the first drop down menu (Which cluster are you applying for an account on?), select `vetmed`.
 Then, upload your public key file to the page.
-Submit the form. 
-If the cluster admins approve your account, you will now have farm access!
-Don't loose the key file pair you just made. 
+Submit the form.
+Once Titus approves your account, you will have farm access!
+
+Don't lose the key file pair you just made. 
 You will need the private key file each time you log into farm.
 
 
@@ -68,7 +69,7 @@ ssh -i ~/.ssh/your_keyfile_name username@farm.cse.ucdavis.edu
 ```
 
 If you are successful, you will see a message that looks something like this:
-* Farm user name might be different than email, if email does not work. Try using UC Davis computing account user name.
+* Your Farm user name might be different than your e-mail username; if your e-mail username does not work, try using your UC Davis computing account user name (aka your Kerberos username or CAS LoginID).
 
 ```
 Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-70-generic x86_64)
