@@ -71,7 +71,7 @@ The outputs file, `SRR1976948.sig` holds a representative subset of k-mers from 
 The k-mers are "hashed", or transformed, into numbers to make selecting, storing, and looking up the k-mers more efficient.
 In addition, these techniques remove the necessity to trim the raw fasta files before processing as the likelihood of finding a matching erroneous hash is statistically **extremely** unlikely.
 
-To quickly peak at a signature file, database, or collection created by sourmash. Use:
+To quickly peek at a signature file, database, or collection created by sourmash. Use:
 
 ```
 sourmash sig summarize SRR1976948.sig
