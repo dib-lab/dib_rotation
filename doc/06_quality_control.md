@@ -178,10 +178,16 @@ srun -p bmh -J khmer -t 20:00:00 --mem=21gb -c 1 --pty bash
 
 Since we changed computers, our conda environment was automatically deactivated.
 
-Activate your project environment again:
+Create a new environment:
 
 ```
-conda activate dib_rotation
+conda create -n khmer
+```
+
+> This step (creating a new environment) was necessary because `khmer` requires a different python version than we have installed in our `dib_rotation` environment. You can compare the two environments with `conda list -n dib_rotation` and `conda list -n khmer`... after we finish setting up the `khmer` environment though!
+
+```
+mamba activate khmer
 ```
 
 ### Install khmer
