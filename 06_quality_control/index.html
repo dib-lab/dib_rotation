@@ -1,0 +1,1245 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://dib-lab.github.io/dib_rotation/06_quality_control/">
+      
+      
+        <link rel="prev" href="../05_starting_with_data/">
+      
+      
+        <link rel="next" href="../07_taxonomic_discovery_with_sourmash/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.8">
+    
+    
+      
+        <title>Quality Control - dib-lab metagenomics rotation project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="black">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quality-control-the-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="dib-lab metagenomics rotation project" class="md-header__button md-logo" aria-label="dib-lab metagenomics rotation project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dib-lab metagenomics rotation project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quality Control
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dib-lab/dib_rotation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dib_rotation
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="dib-lab metagenomics rotation project" class="md-nav__button md-logo" aria-label="dib-lab metagenomics rotation project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    dib-lab metagenomics rotation project
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dib-lab/dib_rotation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dib_rotation
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_farm_account/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up Farm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_conda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install Conda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Background Reading
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Background Reading
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_background_reading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scientific Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00a_unix/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unix Tutorials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_documentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Keeping a Lab Notebook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04b_starting_a_work_session/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Starting a Work Session
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Metagenomics Project
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Metagenomics Project
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_starting_with_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find and download the data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Quality Control
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Quality Control
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-quality-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of Quality Control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-and-how-to-trim" class="md-nav__link">
+    <span class="md-ellipsis">
+      When and how to trim?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-about-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      References about trimming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-and-adapter-trimming-with-fastp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality and Adapter trimming with Fastp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality and Adapter trimming with Fastp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-fastp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run fastp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-or-why-not-do-k-mer-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why (or why not) do k-mer trimming?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kmer-trimming-with-khmer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kmer trimming with khmer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kmer trimming with khmer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-khmer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install khmer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-khmer-for-k-mer-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using khmer for k-mer trimming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assess-changes-in-kmer-abundance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assess changes in kmer abundance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_taxonomic_discovery_with_sourmash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taxonomic Discovery with Sourmash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_bin_completion_with_spacegraphcats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bin Completion with Spacegraphcats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_assembling_a_nbhd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assembling a Nbhd
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_annotating_amino_acid_sequences/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotating amino acid sequences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Advanced Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_workflows_and_repeatability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Automation, Workflows, and Repeatability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_angus_github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control with Git and GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_contribute_on_github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribute on GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-quality-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of Quality Control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-and-how-to-trim" class="md-nav__link">
+    <span class="md-ellipsis">
+      When and how to trim?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references-about-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      References about trimming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-and-adapter-trimming-with-fastp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality and Adapter trimming with Fastp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality and Adapter trimming with Fastp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-fastp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run fastp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-or-why-not-do-k-mer-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why (or why not) do k-mer trimming?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kmer-trimming-with-khmer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kmer trimming with khmer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kmer trimming with khmer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-khmer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install khmer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-khmer-for-k-mer-trimming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using khmer for k-mer trimming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assess-changes-in-kmer-abundance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assess changes in kmer abundance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="quality-control-the-data">Quality Control the Data</h1>
+<p>If you're starting a new work session on FARM, be sure to follow the instructions <a href="../04b_starting_a_work_session/">here</a>.</p>
+<p>After <a href="../05_starting_with_data/">downloading sequencing data</a>, the next step in many pipelines is to perform quality control trimming on the reads.
+However, deciding when and how to trim data is pipeline dependent.
+Below, we define a few types of quality control and explore a use cases and how trimming recommendations may change with different applications.
+Although this project focuses on metagenomic sequencing, we include other applications in this discussion.</p>
+<h2 id="types-of-quality-control">Types of Quality Control</h2>
+<ul>
+<li><strong>Adapter and barcode trimming</strong>: Adapter sequences are added to a sample library to aid in the physical process of sequencing.
+They are ubiquitous within a certain chemistry, and so are present across all sequenced samples. 
+Barcodes are unique nucleotide sequences used to identify a specific sample when multiple samples are sequenced in a single lane.
+After barcoded samples are separated from one another in a process called demultiplexing, barcodes are no longer needed in a sequence. 
+It is generally a good idea to remove adapters and barcodes from sequencing samples before proceeding with any downstream application. 
+However, if you are using a pipeline that involves matching between reads and a quality reference, you may get similar results with or without adapter trimming. For quick estimation </li>
+<li><strong>Quality trimming</strong>: Quality trimming removes low-quality bases from sequences reads. The user can set the stringency cut off for "low quality" by indicating a phred score at which to trim. </li>
+<li><strong>K-mer trimming</strong>: K-mer trimming removes k-mers that occur very few times in a sequencing dataset. In reads with sufficient sequencing depth, we expect real k-mers to occur multiple times. When a single sequencing error occurs in a read, this produces <em>k</em> erroneous k-mers. K-mer trimming trims a read to remove all of these k-mers. K-mer trimming does not rely on information from the sequencer like phred scores, but instead on the biological signal in the reads themselves.</li>
+</ul>
+<h2 id="when-and-how-to-trim">When and how to trim?</h2>
+<p>Trimming is a balance of removing artificial or incorrect nucleotides and retaining true nucleotides in sequencing data. 
+What and when to trim therefore changes with the sequencing application, and with the sequencing data itself. 
+Below we explore some trimming use cases to help develop an intuition for what type of trimming is necessary and when.</p>
+<ul>
+<li><strong>Single-species genomic sequencing for assembly</strong>: 
+Let's imagine we have just sequenced an <em>Escherichia coli</em> isolate with 100X coverage and would like to assemble the isolate. 
+We would first want to remove adapters and barcodes to prevent these sequences from ending up in our final assembly. 
+Then, stringent quality and k-mer trimming may be appropriate, because we have high coverage data; even if we were to stringently trim and were only left with 50% of our original number of reads, we would still have 50X coverage of very high quality data. 
+50X coverage is sufficient to acheive a good bacterial assembly in most cases. </li>
+<li><strong><em>de novo</em> RNA-sequencing assembly</strong> Now let's imagine we have sequenced the transcriptome of our favorite species which does not currently have a reference transcriptome.
+Because RNA transcripts have different abundance profiles, we can't use average coverage in the same way as we used it for single-species genomic sequencing. 
+We need to be more careful when we k-mer and error trim so as not to accidentally remove low-abundance reads that represent true transcripts. We would likely use light quality trimming (e.g. a phred score of ~5). For k-mer trimming, we would only trim reads that contain high-abundance k-mers.</li>
+<li><strong>Metagenome <em>de novo</em> assembly</strong> Trimming metagenomic reads for <em>de novo</em> assembly is similar to trimming RNA-sequencing reads for <em>de novo</em> transcriptome assembly. Because there are often low-abundance organisms that have low-coverage in our sequencing datasets, we need to be careful not to accidently remove these during trimming. </li>
+<li><strong>Metagenome read mapping</strong> 
+In referenced-based analyses including mapping of metagenomic reads to a set of reference genomes, reads will often map even when they contain adapters and barcodes. 
+However, in some cases, the presence of adapters and barcodes does prevent mapping, so it is safer to remove all barcodes and adapters. </li>
+</ul>
+<h2 id="references-about-trimming">References about trimming</h2>
+<p>Many scientific studies have explored the trimming parameter space in an effort to make recommendations for different applications. 
+We include some of these studies below.</p>
+<ul>
+<li><a href="https://www.frontiersin.org/articles/10.3389/fgene.2014.00013/full">On the optimal trimming of high-throughput mRNA sequence data</a></li>
+<li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0085024">An Extensive Evaluation of Read Trimming Effects on Illumina NGS Data Analysis</a></li>
+</ul>
+<h2 id="quality-and-adapter-trimming-with-fastp">Quality and Adapter trimming with Fastp</h2>
+<p>We will use <a href="https://academic.oup.com/bioinformatics/article/34/17/i884/5093234">fastp</a> to do quality trimming of our reads.</p>
+<p>In the <a href="../05_starting_with_data/">Downloading Data Module</a>, we saw using FastQC that the Illumina Universal Adapter was present in our samples.</p>
+<p><img alt="" src="../_static/adapter_content_R1.png" /></p>
+<p>We also saw that the sequence read quality dropped dramatically toward the end of the read.</p>
+<p><img alt="" src="../_static/per_base_seq_qual_R1.png" /></p>
+<p>We will remove both of these sequences using fastp.
+Fastp also creates its own FastQC-style <code>html</code> reports for the files that we can look at after running.</p>
+<h3 id="run-fastp">Run fastp</h3>
+<p><strong>Reminder, make sure you've followed the <a href="../04b_starting_a_work_session/">Starting a Work Session</a> steps to get your Farm session set up.</strong>
+<strong>You should be within your <code>dib_rotation</code> conda environment.</strong></p>
+<p>Install fastp:</p>
+<pre><code>mamba install -y fastp
+</code></pre>
+<p>We can now trim our data!
+Let's set up our directory structure:</p>
+<pre><code>cd ~/2020_rotation_project
+mkdir -p trim
+cd trim
+</code></pre>
+<p>Run fastp on the <code>SRR1976948</code> sample with the following command:</p>
+<pre><code>fastp --in1 ../raw_data/SRR1976948_1.fastq.gz \
+  --in2 ../raw_data/SRR1976948_2.fastq.gz \
+  --out1 SRR1976948_1.trim.fastq.gz \
+  --out2 SRR1976948_2.trim.fastq.gz \
+  --detect_adapter_for_pe \
+  --qualified_quality_phred 4 \
+  --length_required 31 --correction \
+  --json SRR1976948.trim.json \
+  --html SRR1976948.trim.html
+</code></pre>
+<blockquote>
+<p><strong>Command Breakdown</strong></p>
+<ul>
+<li><code>--in1</code>, <code>--in2</code> - the read1 and read2 input file names</li>
+<li><code>--out1</code>, <code>--out2</code> - the read1 and read2 output file names</li>
+<li><code>--detect_adapter_for_pe</code> - Auto detect the adapters for our paired end (PE) reads, and remove them during trimming</li>
+<li><code>--length_required</code> - discard reads shorter than <code>length_required</code> paramter (default is 15)</li>
+<li><code>--correction</code> - enable base correction if the paired end reads overlap (only for PE data),</li>
+<li><code>--qualified_quality_phred</code> - the quality value that a base is qualified. Default 15 means phred quality &gt;=Q15 is qualified. (int [=15])</li>
+<li><code>--html</code>, <code>--json</code> - file name for the fastp trimming report printed to html and/or json format </li>
+</ul>
+</blockquote>
+<p>We change the Phred quality score cutoff to <code>4</code> to be more lenient in our trimming.
+Recall from our FastQC lesson that a quality score of 10 indicates a 1 in 10 chance that the base is inaccurate. 
+A score of 20 is a 1 in 100 chance that the base is inaccurate. 30 is 1 in 1,000. And 40 in 1 in 10,000. 
+By using a score of 4, we are more likely to keep data that has a high probability of being accurate. 
+This is especially important in a metagenomics context where using stringent trimming may discard reads from organisms that are low abundance. </p>
+<p>As done in <a href="../05_starting_with_data/">downloading sequencing data</a>, you can use <code>scp</code> to copy the html report to your computer.
+Make sure you're running this command <em>from your own computer</em>, not from <code>farm</code>.</p>
+<pre><code>scp -i /path/to/key/file username@farm.cse.ucdavis.edu:~/2020_rotation_project/trim/*.html ./
+</code></pre>
+<p>If you're on a mac using <code>zsh</code>, you may need to replace the <code>scp</code> with <code>noglob scp</code> in the command above.</p>
+<p>If you're on windows, you may need to move the the files from the download location on your Linux shell over to the windows side of your computer before opening.</p>
+<p>Once the file is on your local computer, double click on it and it will open in your browser.
+You can now explore the fastp trimming report.</p>
+<h2 id="why-or-why-not-do-k-mer-trimming">Why (or why not) do k-mer trimming?</h2>
+<p>Even after quality trimming with fastp, our reads will still contain errors. Why?</p>
+<p>First, fastp trims based solely on the quality score, which is a statistical statement about the correctness of a base - a Q score of 30 means that, of 1000 bases with that Q score, 1 of those bases will be wrong. 
+So, a base can have a high Q score and still be wrong (and many bases will have a low Q score and still be correct)!</p>
+<p>Second, we trimmed very lightly - only bases that had a very low quality were removed. 
+This was intentional because we want to retain as much coverage as possible for our downstream techniques (many of which do not suffer too much if some errors remain).</p>
+<p>An alternative to trimming based on the quality scores is to trim based on k-mer abundance - this is known as k-mer spectral error trimming. 
+K-mer spectral error trimming always beats quality score trimming in terms of eliminating errors; e.g. look at this table from <a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0101271">Zhang et al., 2014</a>:</p>
+<p><img alt="khmer output table" src="../_static/2014-zhang.png" /></p>
+<p>The basic logic is this: if you see low abundance k-mers in a high coverage data set, those k-mers are almost certainly the result of errors. (Caveat: strain variation could also create them.)</p>
+<p>In metatranscriptomic data sets we do have the problem that we may have very low and very high coverage data. 
+So we don’t necessarily want to get rid of all low-abundance k-mers, because they may represent truly low abundance (but useful) data.</p>
+<p>As part of the khmer project in our lab, we have developed an approach that sorts reads into high abundance and low abundance reads, and only error trims the high abundance reads.</p>
+<p><img alt="kmer trimming" src="../_static/kmer-trimming.png" /></p>
+<p>This does mean that many errors may get left in the data set, because we have no way of figuring out if they are errors or simply low coverage, but that’s OK (and you can always trim them off if you really care).</p>
+<h2 id="kmer-trimming-with-khmer">Kmer trimming with khmer</h2>
+<p>Next, let's k-mer trim our data. 
+This will take 20GB of RAM and a few hours to complete. 
+We didn't ask for quite that much RAM when we initially got our computer, so we'll need a different one.</p>
+<p>First, exit your current <code>srun</code> session</p>
+<pre><code>exit
+</code></pre>
+<p>Next, use this <code>srun</code> command to get a larger computer that can handle the k-mer trimming analysis:</p>
+<pre><code>srun -p bmh -J khmer -t 20:00:00 --mem=21gb -c 1 --pty bash
+</code></pre>
+<p>Since we changed computers, our conda environment was automatically deactivated.</p>
+<p>Activate your project environment again:</p>
+<pre><code>conda activate dib_rotation
+</code></pre>
+<h3 id="install-khmer">Install khmer</h3>
+<p>We need to install the software we will use to perform k-mer trimming, <code>khmer</code>.
+Make sure you've activated the conda environment you are using for this project before running this command!</p>
+<pre><code>mamba install -y khmer
+</code></pre>
+<h3 id="using-khmer-for-k-mer-trimming">Using khmer for k-mer trimming</h3>
+<p>Once <code>khmer</code> is installed, we can use it for k-mer trimming. 
+Let's get our files and directories set up:</p>
+<pre><code>cd ~/2020_rotation_project
+mkdir -p abundtrim
+cd abundtrim
+</code></pre>
+<p>Now we can run k-mer trimming!
+The first line of this command interleaves our paired end reads, putting them in one file where forward and reverse reads alternate on each line.
+The second line of this command performs the k-mer trimming. </p>
+<p>Note that these commands are connected by the pipe (<code>|</code>) character.
+This character means that the first half of the command (before the <code>|</code>) is executed first, and the output is passed ("piped") to the second half of the command (after the <code>|</code>).</p>
+<pre><code>interleave-reads.py ../trim/SRR1976948_1.trim.fastq.gz ../trim/SRR1976948_2.trim.fastq.gz | \
+        trim-low-abund.py --gzip -C 3 -Z 18 -M 20e9 -V - -o SRR1976948.abundtrim.fq.gz
+</code></pre>
+<blockquote>
+<p>Note: Here, we are referencing the trimmed files using a relative path: <code>../trim/</code>.
+That is, to access these files, we go up one directory level (<code>..</code>), then descend into the <code>trim</code> folder.</p>
+</blockquote>
+<h3 id="assess-changes-in-kmer-abundance">Assess changes in kmer abundance</h3>
+<p>To see how many k-mers we removed, you can examine the distribution as above,
+or use the <code>unique-kmers.py</code> script. Let's compare kmers for one sample.</p>
+<pre><code>unique-kmers.py ../trim/SRR1976948_1.trim.fastq.gz ../trim/SRR1976948_2.trim.fastq.gz
+unique-kmers.py SRR1976948.abundtrim.fq.gz
+</code></pre>
+<blockquote>
+<p>Note, here we are using a relative path, <code>../trim/</code>.
+That is, to access the <code>SRR1976948_*.trim.fastq.gz</code> files, we go up one directory (<code>../</code>), then down into <code>trim</code>.</p>
+</blockquote>
+<p>The raw adapter-trimmed inputs have an estimated 442441435 unique 32-mers.</p>
+<pre><code>Estimated number of unique 32-mers in ../trim/SRR1976948_1.trim.fastq.gz: 271670733
+Estimated number of unique 32-mers in ../trim/SRR1976948_2.trim.fastq.gz: 370246495
+Total estimated number of unique 32-mers: 442441435
+</code></pre>
+<p>The k-mer trimmed file (kmer output) has an estimated  unique 32-mers.</p>
+<pre><code>Estimated number of unique 32-mers in SRR1976948.kmertrim.fq.gz: 329577970
+Total estimated number of unique 32-mers: 329577970
+</code></pre>
+<p>Note that the second number is smaller than the first, with over 112m k-mers removed.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 <a href="http://ivory.idyll.org/lab/">Lab for Data Intensive Biology</a> at UC Davis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

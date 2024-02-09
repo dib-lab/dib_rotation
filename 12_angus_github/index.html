@@ -1,0 +1,1340 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://dib-lab.github.io/dib_rotation/12_angus_github/">
+      
+      
+        <link rel="prev" href="../11_workflows_and_repeatability/">
+      
+      
+        <link rel="next" href="../13_contribute_on_github/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.8">
+    
+    
+      
+        <title>Version Control with Git and GitHub - dib-lab metagenomics rotation project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-orange" data-md-color-accent="black">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#version-control-with-github" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="dib-lab metagenomics rotation project" class="md-header__button md-logo" aria-label="dib-lab metagenomics rotation project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dib-lab metagenomics rotation project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Version Control with Git and GitHub
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dib-lab/dib_rotation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dib_rotation
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="dib-lab metagenomics rotation project" class="md-nav__button md-logo" aria-label="dib-lab metagenomics rotation project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+
+    </a>
+    dib-lab metagenomics rotation project
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dib-lab/dib_rotation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dib_rotation
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_farm_account/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up Farm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_conda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install Conda
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Background Reading
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Background Reading
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_background_reading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scientific Literature
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00a_unix/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unix Tutorials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_documentation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Keeping a Lab Notebook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04b_starting_a_work_session/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Starting a Work Session
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Metagenomics Project
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Metagenomics Project
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_starting_with_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find and download the data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_quality_control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quality Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_taxonomic_discovery_with_sourmash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taxonomic Discovery with Sourmash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_bin_completion_with_spacegraphcats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bin Completion with Spacegraphcats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_assembling_a_nbhd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assembling a Nbhd
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_annotating_amino_acid_sequences/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Annotating amino acid sequences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Advanced Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_workflows_and_repeatability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Automation, Workflows, and Repeatability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Version Control with Git and GitHub
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Version Control with Git and GitHub
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Github?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Is Git?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git terms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git terms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version Control:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commit:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-specific-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git-Specific Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-github-and-git-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up GitHub And Git For The First Time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-online-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Your Online Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-local-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Your Local Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-your-local-repository-to-your-github-repository-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect Your Local Repository To Your GitHub Repository Online
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collaborating-via-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaborating via GitHub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-websites-blogs-on-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Host Websites &amp; Blogs on GitHub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-tutorial-additional-git-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources for this tutorial &amp; Additional Git Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_contribute_on_github/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribute on GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Github?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Is Git?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git terms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git terms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version Control:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commit:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-specific-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git-Specific Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-github-and-git-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up GitHub And Git For The First Time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-online-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Your Online Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-local-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Your Local Repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-your-local-repository-to-your-github-repository-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect Your Local Repository To Your GitHub Repository Online
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collaborating-via-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaborating via GitHub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-websites-blogs-on-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Host Websites &amp; Blogs on GitHub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources-for-this-tutorial-additional-git-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources for this tutorial &amp; Additional Git Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="version-control-with-github">Version Control with Github</h1>
+<p>Learning objectives</p>
+<ul>
+<li>Learn about version Control</li>
+<li>Learn about Github repositories</li>
+<li>Create local repositories</li>
+<li>Backup your work online using git</li>
+</ul>
+<h2 id="setup">Setup</h2>
+<p>You’ll need to sign up for a free account on <a href="https://github.com/">GitHub.com</a>. It’s as simple as signing up for any other social network. Keep the email you picked handy; we’ll be referencing it again in the lesson.</p>
+<p><code>Git</code> is installed on many system, but if you don't already have it, instructions to install Git for Windows, Mac or Linux can be found <a href="https://git-scm.com/downloads">here</a>.</p>
+<h2 id="what-is-github">What is Github?</h2>
+<p>GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere. GitHub is now the largest online storage space of collaborative works that exists in the world</p>
+<h2 id="what-is-git">What Is Git?</h2>
+<p>Why use something like Git? Say you and a coworker are both updating pages on the same website. You make your changes, save them, and upload them back to the website. So far, so good. The problem comes when your coworker is working on the same page as you at the same time. One of you is about to have your work overwritten and erased.</p>
+<p>A version control application like Git keeps that from happening. You and your coworker can each upload your revisions to the same page, and Git will save two copies. Later, you can merge your changes together without losing any work along the way. You can even revert to an earlier version at any time, because Git keeps a “snapshot” of every change ever made.</p>
+<h2 id="git-terms">Git terms</h2>
+<h4 id="repository"><strong>Repository:</strong></h4>
+<p>A directory or storage space where your projects can live. Sometimes GitHub users shorten this to “repo.” It can be local to a folder on your computer, or it can be a storage space on GitHub or another online host. You can keep code files, text files, image files, you name it, inside a repository.</p>
+<h4 id="version-control"><strong>Version Control:</strong></h4>
+<p>Basically, the purpose Git was designed to serve. When you have a Microsoft Word file, you either overwrite every saved file with a new save, or you save multiple versions. With Git, you don’t have to. It keeps “snapshots” of every point in time in the project’s history, so you can never lose or overwrite it.</p>
+<h4 id="commit"><strong>Commit:</strong></h4>
+<p>This is the command that gives Git its power. When you commit, you are taking a “snapshot” of your repository at that point in time, giving you a checkpoint to which you can reevaluate or restore your project to any previous state.</p>
+<h4 id="branch"><strong>Branch:</strong></h4>
+<p>How do multiple people work on a project at the same time without Git getting them confused? Usually, they “branch off” of the main project with their own versions full of changes they themselves have made. After they’re done, it’s time to “merge” that branch back with the “master,” the main directory of the project.</p>
+<p><img alt="branch" src="../_static/git_branch.png" /></p>
+<h2 id="git-specific-commands">Git-Specific Commands</h2>
+<p><code>git init</code>: Initializes a new Git repository. Until you run this command inside a repository or directory, it’s just a regular folder. Only after you input this does it accept further Git commands.</p>
+<p><code>git config</code>: Short for “configure,” this is most useful when you’re setting up Git for the first time.</p>
+<p><code>git help</code>: Forgot a command? Type this into the command line to bring up the 21 most common git commands. You can also be more specific and type “git help init” or another term to figure out how to use and configure a specific git command.</p>
+<p><code>git status</code>: Check the status of your repository. See which files are inside it, which changes still need to be committed, and which branch of the repository you’re currently working on.</p>
+<p><code>git add</code>: This does not add new files to your repository. Instead, it brings new files to Git’s attention. After you add files, they’re included in Git’s “snapshots” of the repository.</p>
+<p><code>git commit</code>: Git’s most important command. After you make any sort of change, you input this in order to take a “snapshot” of the repository. Usually it goes <code>git commit -m “Message here.”</code> The <code>-m</code> indicates that the following section of the command should be read as a message.</p>
+<p><code>git branch</code>: Working with multiple collaborators and want to make changes on your own? This command will let you build a new branch, or timeline of commits, of changes and file additions that are completely your own. Your title goes after the command. If you wanted a new branch called “cats,” you’d type <code>git branch cats</code>.</p>
+<p><code>git checkout</code>: Literally allows you to “check out” a repository that you are not currently inside. This is a navigational command that lets you move to the repository you want to check. You can use this command as g<code>it checkout master</code> to look at the master branch, or <code>git checkout cats</code> to look at another branch.</p>
+<p><code>git merge</code>: When you’re done working on a branch, you can merge your changes back to the master branch, which is visible to all collaborators. <code>git merge cats</code> would take all the changes you made to the “cats” branch and add them to the master.</p>
+<p><code>git push</code>: If you’re working on your local computer, and want your commits to be visible online on GitHub as well, you “push” the changes up to GitHub with this command.</p>
+<p><code>git pull</code>: If you’re working on your local computer and want the most up-to-date version of your repository to work with, you “pull” the changes down from GitHub with this command.</p>
+<h2 id="setting-up-github-and-git-for-the-first-time">Setting Up GitHub And Git For The First Time</h2>
+<p><strong>It’s time to introduce yourself to Git. Type in the following code:</strong></p>
+<pre><code>git config --global user.name &quot;Your Name Here&quot;
+</code></pre>
+<p>Next, tell it your email and make sure it’s the same email you used when you signed up for a GitHub.com account</p>
+<pre><code>git config --global user.email &quot;your_email@youremail.com&quot;
+</code></pre>
+<h2 id="creating-your-online-repository">Creating Your Online Repository</h2>
+<p>Now that you’re all set up, it’s time to create a place for your project to live. Both Git and GitHub refer to this as a repository, or “repo” for short, a digital directory or storage space where you can access your project, its files, and all the versions of its files that Git saves.</p>
+<ul>
+<li>On your Github profile, click the plus button and select a "New Repository".</li>
+</ul>
+<p><img alt="newrepo" src="../_static/git_new_repo.png" /></p>
+<ul>
+<li>
+<p>Give your repository a name &amp; fill out the necessary information for your repository to be distinct and recognizeable.</p>
+</li>
+<li>
+<p>Don’t worry about clicking the checkbox next to “Initialize this repository with a README.” A Readme file is usually a text file that explains a bit about the project. But we can make our own Readme file locally for practice.</p>
+</li>
+<li>
+<p>Click the green “Create Repository” button and you’re set. You now have an online space for your project to live in.</p>
+</li>
+</ul>
+<p><img alt="createrepo" src="../_static/git_create_repo.png" /></p>
+<h2 id="creating-your-local-repository">Creating Your Local Repository</h2>
+<p>To begin, let's create a new directory called MyProject.</p>
+<pre><code>mkdir ~/MyProject
+</code></pre>
+<p>Then we will move into this new directory.</p>
+<pre><code>cd ~/MyProject
+</code></pre>
+<p>To create a local repository, we will first initiate a new repository for "MyProject" by entering the following command:</p>
+<pre><code>git init
+</code></pre>
+<p><code>touch</code> is a multi-purpose command, but one of its key uses is to creat new, empty files. In our case, we will create a new file called Readme.txt. </p>
+<pre><code>touch Readme.txt
+</code></pre>
+<p>We can check the status of our new repository by using <code>git status</code>.  </p>
+<pre><code>git status
+</code></pre>
+<p>When we want Git to track a file, we use <code>git add</code> followed by the file we want Git to "see". If we do not use <code>git add</code>, Git will not "see" this file.</p>
+<pre><code>git add Readme.txt
+</code></pre>
+<p>Lastly, to have Git track the current "snapshot" of our file, we enter <code>git commit</code>. The <code>-m</code> flag allows us to add a personal message with the files we are committing. In the following example, our message is "Add Readme.txt". Examples of other messages could include version information, changes made to a document, document descriptions, etc. </p>
+<pre><code>git commit -m “Add Readme.txt”
+</code></pre>
+<p>Now Git has a "snapshot" of this version of Readme.txt which you can return to at any time in the future!</p>
+<p><img alt="gitworking" src="../_static/git_working.png" /></p>
+<h2 id="connect-your-local-repository-to-your-github-repository-online">Connect Your Local Repository To Your GitHub Repository Online</h2>
+<p><img alt="gitremote" src="../_static/git_remote.png" /></p>
+<p>This setup also makes it easy to have multiple collaborators working on the same project. Each of you can work alone on your own computers, but upload or “push” your changes up to the GitHub repository when they’re ready.</p>
+<p>To tell Git the address off your remote repo in Github, Type the following replacing the address of the repo with your own</p>
+<pre><code>git remote add origin https://github.com/username/myproject.git
+</code></pre>
+<p>Git now knows there’s a remote repository and it’s where you want your local repository changes to go. To confirm, type this to check:</p>
+<pre><code>git remote -v
+</code></pre>
+<p>Great, Git is able to connect with our remote on Github. So, let's go ahead and push our files to Github</p>
+<pre><code>git push origin master
+</code></pre>
+<p><strong>You will be prompted for your Github username and password at this point</strong></p>
+<p>and you can see some output like this that git is sending packets of data to your github repo and by this you will force git to back up all of your commits since the last time you pushed to be backed up online. FOR FREE!</p>
+<pre><code>Counting objects: 3, done.
+Writing objects: 100% (3/3), 217 bytes | 217.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/sateeshbio5/angus_test.git
+ * [new branch]      master -&gt; master
+
+</code></pre>
+<blockquote>
+<p>Note: To avoid having to type your username and password each time you push/pull from your github repos, read about Secure Login <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">here</a></p>
+</blockquote>
+<p><img alt="repo" src="../_static/github_repo.png" /></p>
+<h2 id="collaborating-via-github">Collaborating via GitHub</h2>
+<ul>
+<li><strong>GitHub Issues:</strong> Issues are a great way to keep track of tasks, enhancements, and bugs for your projects. They’re kind of like email—except they can be shared and discussed with all. Read more about Mastering Issues on Github <a href="https://guides.github.com/features/issues/">here</a></li>
+</ul>
+<p><img alt="issues" src="../_static/git_issues.png" /></p>
+<ul>
+<li><strong>GitHub Pull-Requests:</strong> Pull requests let you tell others about changes you've pushed to a branch in a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before your changes are merged into the base branch.</li>
+</ul>
+<p><img alt="PR" src="../_static/git_PR.png" /></p>
+<p>Look at others' repositories:</p>
+<ul>
+<li>
+<p><a href="https://github.com/hadley">Hadley Wickham (ggplot2)</a></p>
+</li>
+<li>
+<p><a href="https://github.com/yihui">Yihui Xie (knitr)</a></p>
+</li>
+<li>
+<p><a href="https://angus.readthedocs.io/en/2019/">ANGUS 2019</a></p>
+</li>
+</ul>
+<h2 id="host-websites-blogs-on-github">Host Websites &amp; Blogs on GitHub</h2>
+<ul>
+<li>
+<p>GitHub Pages is an awesome feature that lets you host websites/blogs for you and your projects.</p>
+</li>
+<li>
+<p>Hosted directly from your GitHub repository. Just edit, push, and your changes are live.</p>
+</li>
+<li>
+<p>Read more about GitHub Pages <a href="https://pages.github.com/">here</a></p>
+</li>
+</ul>
+<h2 id="sources-for-this-tutorial-additional-git-resources">Sources for this tutorial &amp; Additional Git Resources</h2>
+<ul>
+<li>
+<p><strong>Introductory tutorial by Lauren Orsini <a href="https://readwrite.com/2013/09/30/understanding-github-a-journey-for-beginners-part-1/">here</a></strong></p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book">Pro Git</a></p>
+</li>
+<li>
+<p><a href="https://www.codeschool.com/courses/try-git">Try Git</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/GitHubGuides">Github Guides</a></p>
+</li>
+<li>
+<p><a href="http://gitref.org/">Github Reference</a></p>
+</li>
+<li>
+<p><a href="https://rogerdudler.github.io/git-guide">Git - Simple Guide</a></p>
+</li>
+<li>
+<p><a href="https://guides.github.com/activities/hello-world/">Github Hello World</a></p>
+</li>
+</ul>
+<p><em>this lesson adapted from materials in <a href="https://angus.readthedocs.io/en/2019/github.html">ANGUS 2019</a></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 <a href="http://ivory.idyll.org/lab/">Lab for Data Intensive Biology</a> at UC Davis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>
