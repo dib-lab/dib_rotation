@@ -36,7 +36,7 @@ kofamscan is not available as a conda package, but being able to use the KEGG fr
 We'll create a new environment for kofamscan, and use conda to install all of its dependencies.
 
 ```
-mamba create -n kofamscan hmmer parallel ruby kofamscan
+mamba create -n kofamscan hmmer parallel ruby kofamscan python=3.6
 conda activate kofamscan
 ```
 
