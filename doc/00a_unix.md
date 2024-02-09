@@ -4,3 +4,6 @@ You will need to download the data for this lesson [here](https://figshare.com/a
 + [An Introduction to Shell](https://angus.readthedocs.io/en/2019/shell_intro/index.html).
 + [The Unix Shell](https://swcarpentry.github.io/shell-novice/)
 + [Introduction to using the shell in a High-Performance Computing context](https://hpc-carpentry.github.io/hpc-shell/)
++ [Unix Introduction for GGG courses at UC Davis](https://hackmd.io/5EfBWjCmTbWLgdC4rg8GZw#)
+    - [Happy Belly Bioinformatics: Unix Crash Course](https://astrobiomike.github.io/unix/unix-intro)
+    - [Hannah's Unix Cafe](https://github.com/ctb/hannahs-unix-cafe)

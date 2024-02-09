@@ -17,7 +17,7 @@ theme:
   palette:
     primary: 'deep orange'
     accent: 'black'
-  
+
   # fun logos! see https://material.io/icons/
   icon:
     logo: material/school
@@ -25,14 +25,16 @@ theme:
   font:
     text: 'Roboto'
     code: 'Roboto Mono'
-  
+
 # optionally give a title for each page or section
 nav:
   - 'Home': 'index.md'
   - "Setup":
     - "Setting up Farm": "01_farm_account.md"
     - "Install Conda": "02_conda.md"
-  - "Background Reading": "03_background_reading.md"
+  - "Background Reading":
+    - "Scientific Literature": "03_background_reading.md"
+    - "Unix Tutorials": "00a_unix.md"
   - "Keeping a Lab Notebook": "04_documentation.md"
   - "Starting a Work Session": "04b_starting_a_work_session.md"
   - "Metagenomics Project":
@@ -46,3 +48,4 @@ nav:
     - "Automation, Workflows, and Repeatability": "11_workflows_and_repeatability.md"
     - "Version Control with Git and GitHub":  "12_angus_github.md"
     - "Contribute on GitHub": "13_contribute_on_github.md"
+
